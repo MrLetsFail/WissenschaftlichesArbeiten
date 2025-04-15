@@ -1,0 +1,2532 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wissenschaftliches Arbeiten Guide - MU Berlin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        /* Custom styles */
+        .sidebar {
+            transition: all 0.3s;
+        }
+        
+        .section-content {
+            display: none;
+        }
+        
+        .section-content.active {
+            display: block;
+        }
+        
+        .accordion {
+            cursor: pointer;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .accordion-content.open {
+            max-height: 1000px;
+        }
+        
+        body {
+            counter-reset: section;
+        }
+        
+        .section-heading::before {
+            counter-increment: section;
+            content: counter(section) ". ";
+        }
+        
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -24px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #4B5563;
+        }
+        
+        .timeline-item::after {
+            content: "";
+            position: absolute;
+            left: -29px;
+            top: 0;
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            background-color: #6366F1;
+        }
+        
+        /* Print-friendly styles */
+        @media print {
+            .sidebar, .nav-tabs {
+                display: none;
+            }
+            
+            .section-content {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+            
+            .accordion-content {
+                max-height: none !important;
+                display: block !important;
+            }
+            
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <header class="bg-indigo-700 text-white shadow-lg py-4 px-6 flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-bold">Wissenschaftliches Arbeiten Guide</h1>
+            <p class="text-sm">MU Berlin - G1 Wissenschaftliches Propädeutikum</p>
+        </div>
+        <div class="md:hidden">
+            <button id="menu-toggle" class="text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <div id="sidebar" class="sidebar bg-gray-800 text-white w-64 min-h-screen fixed left-0 top-16 z-10 md:block hidden overflow-y-auto">
+            <nav class="p-4">
+                <div class="mb-6">
+                    <input type="text" id="search-input" placeholder="Suchen..." class="w-full p-2 rounded text-gray-900 text-sm">
+                </div>
+                <ul id="nav-menu" class="space-y-2">
+                    <li><a href="#grundlagen" class="nav-link block p-2 rounded hover:bg-indigo-600 transition">Grundlagen</a></li>
+                    <li><a href="#themenfindung" class="nav-link block p-2 rounded hover:bg-indigo-600 transition">Themenfindung & Forschungsfrage</a></li>
+                    <li><a href="#literaturrecherche" class="nav-link block p-2 rounded hover:bg-indigo-600 transition">Literaturrecherche</a></li>
+                    <li><a href="#methoden" class="nav-link block p-2 rounded hover:bg-indigo-600 transition">Empirische Methoden</a></li>
+                    <li><a href="#schreibprozess" class="nav-link block p-2 rounded hover:bg-indigo-600 transition">Schreibprozess</a></li>
+                    <li><a href="#zitieren" class="nav-link block p-2 rounded hover:bg-indigo-600 transition">Zitieren</a></li>
+                    <li><a href="#zeitplanung" class="nav-link block p-2 rounded hover:bg-indigo-600 transition">Zeitplanung</a></li>
+                    <li><a href="#beispiele" class="nav-link block p-2 rounded hover:bg-indigo-600 transition">Beispielhausarbeiten</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content w-full md:ml-64 p-6 bg-white min-h-screen">
+            <!-- Introduction -->
+            <div class="mb-8 bg-indigo-50 p-6 rounded-lg shadow-sm">
+                <h2 class="text-2xl font-bold mb-4 text-indigo-800">Wissenschaftliches Arbeiten - Interaktiver Guide</h2>
+                <p class="mb-4">Dieser interaktive Leitfaden basiert auf den Vorlesungsmaterialien der MU Berlin zum Kurs "G1 Wissenschaftliches Propädeutikum" und unterstützt Sie umfassend bei der Vorbereitung und Durchführung Ihrer wissenschaftlichen Hausarbeit.</p>
+                <p class="mb-4">Navigieren Sie durch die verschiedenen Bereiche, um den gesamten Prozess des wissenschaftlichen Arbeitens zu verstehen – von der Themenfindung über die Literaturrecherche bis zur finalen Abgabe.</p>
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                    <p class="text-yellow-700"><strong>Hinweis:</strong> Die Navigation auf der linken Seite ermöglicht Ihnen den schnellen Zugriff auf alle Themengebiete. Nutzen Sie das Suchfeld, um gezielt nach Inhalten zu suchen.</p>
+                </div>
+            </div>
+
+            <!-- Section 1: Grundlagen -->
+            <section id="grundlagen" class="section-content mb-12 active">
+                <h2 class="section-heading text-2xl font-bold mb-6 pb-2 border-b-2 border-indigo-200">Grundlagen wissenschaftlichen Arbeitens</h2>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Was ist wissenschaftliches Arbeiten?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Wissenschaftliches Arbeiten bezeichnet eine methodische Vorgehensweise, die sich durch folgende Merkmale auszeichnet:</p>
+                            <ul class="list-disc pl-6 mb-4 space-y-2">
+                                <li>Systematisches und methodisches Vorgehen</li>
+                                <li>Nachvollziehbarkeit und Überprüfbarkeit von Aussagen</li>
+                                <li>Streben nach Objektivität und kritischer Reflexion</li>
+                                <li>Logische Argumentation und Begründung</li>
+                                <li>Einordnung in den Forschungskontext</li>
+                                <li>Korrekte Verwendung und Kennzeichnung von Quellen</li>
+                            </ul>
+                            <p>Im Gegensatz zur Alltagskommunikation zeichnet sich wissenschaftliches Arbeiten durch eine präzise Sprache, eine klare Struktur und eine fundierte Argumentation aus.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Induktion & Deduktion</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Induktion</h4>
+                                    <p class="mb-2">Vom Speziellen zum Allgemeinen</p>
+                                    <p class="mb-3">Bei der Induktion werden aus einzelnen Beobachtungen oder Fällen allgemeine Schlüsse gezogen.</p>
+                                    <p><strong>Beispiel:</strong> Aus verschiedenen Beobachtungen von schwarzen Raben wird geschlossen, dass alle Raben schwarz sind.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Deduktion</h4>
+                                    <p class="mb-2">Vom Allgemeinen zum Speziellen</p>
+                                    <p class="mb-3">Bei der Deduktion werden aus allgemeinen Prinzipien oder Theorien spezifische Schlussfolgerungen abgeleitet.</p>
+                                    <p><strong>Beispiel:</strong> Aus der Theorie "Alle Menschen sind sterblich" und der Feststellung "Sokrates ist ein Mensch" wird deduziert, dass Sokrates sterblich ist.</p>
+                                </div>
+                            </div>
+                            <p class="mb-3">Diese beiden Ansätze sind wichtige Grundprinzipien wissenschaftlichen Denkens und können auch kombiniert angewendet werden (abduktives Denken).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Qualitative vs. Quantitative Forschung</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white border border-gray-200 mb-4">
+                                    <thead>
+                                        <tr>
+                                            <th class="border border-gray-200 p-3 bg-gray-50 text-left">Aspekt</th>
+                                            <th class="border border-gray-200 p-3 bg-gray-50 text-left">Qualitative Forschung</th>
+                                            <th class="border border-gray-200 p-3 bg-gray-50 text-left">Quantitative Forschung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Ziel</td>
+                                            <td class="border border-gray-200 p-3">Verstehen und Beschreiben von Phänomenen</td>
+                                            <td class="border border-gray-200 p-3">Messen und Zählen, statistische Auswertung</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Methoden</td>
+                                            <td class="border border-gray-200 p-3">Interviews, Beobachtungen, Fallstudien</td>
+                                            <td class="border border-gray-200 p-3">Umfragen, Experimente, statistische Analysen</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Daten</td>
+                                            <td class="border border-gray-200 p-3">Texte, Bilder, Beobachtungen</td>
+                                            <td class="border border-gray-200 p-3">Zahlen, Messwerte, statistische Kennwerte</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Stichprobengröße</td>
+                                            <td class="border border-gray-200 p-3">Meist klein (wenige Personen/Fälle)</td>
+                                            <td class="border border-gray-200 p-3">Meist groß (viele Personen/Fälle)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Analyse</td>
+                                            <td class="border border-gray-200 p-3">Interpretativ, hermeneutisch</td>
+                                            <td class="border border-gray-200 p-3">Statistisch, mathematisch</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="mb-2">Beide Ansätze haben ihre Stärken und Schwächen:</p>
+                            <ul class="list-disc pl-6 mb-4 space-y-1">
+                                <li>Qualitative Forschung ermöglicht tiefere Einblicke, ist aber weniger generalisierbar</li>
+                                <li>Quantitative Forschung erlaubt Verallgemeinerungen, kann aber wichtige Nuancen übersehen</li>
+                                <li>Mixed-Methods-Ansätze kombinieren beide Vorgehensweisen und gleichen Schwächen aus</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Aufbau einer wissenschaftlichen Arbeit</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Eine wissenschaftliche Arbeit folgt in der Regel einer klaren Struktur:</p>
+                            <div class="mb-4">
+                                <div class="flex flex-col space-y-2">
+                                    <div class="bg-indigo-50 p-3 rounded shadow-sm">
+                                        <strong class="text-indigo-700">1. Deckblatt</strong>
+                                        <p>Enthält Titel, Name, Matrikelnummer, Betreuer, Fach, Datum</p>
+                                    </div>
+                                    <div class="bg-indigo-50 p-3 rounded shadow-sm">
+                                        <strong class="text-indigo-700">2. Inhaltsverzeichnis</strong>
+                                        <p>Übersicht über die Kapitel mit Seitenzahlen</p>
+                                    </div>
+                                    <div class="bg-indigo-50 p-3 rounded shadow-sm">
+                                        <strong class="text-indigo-700">3. Einleitung</strong>
+                                        <p>Hinführung zum Thema, Problemstellung, Forschungsfrage, Überblick über die Arbeit</p>
+                                    </div>
+                                    <div class="bg-indigo-50 p-3 rounded shadow-sm">
+                                        <strong class="text-indigo-700">4. Hauptteil</strong>
+                                        <p>Theoretischer Hintergrund, Methodik, Darstellung und Analyse der Ergebnisse</p>
+                                    </div>
+                                    <div class="bg-indigo-50 p-3 rounded shadow-sm">
+                                        <strong class="text-indigo-700">5. Fazit</strong>
+                                        <p>Zusammenfassung der Ergebnisse, Beantwortung der Forschungsfrage, Ausblick</p>
+                                    </div>
+                                    <div class="bg-indigo-50 p-3 rounded shadow-sm">
+                                        <strong class="text-indigo-700">6. Literaturverzeichnis</strong>
+                                        <p>Alphabetisch geordnete Liste aller verwendeten Quellen</p>
+                                    </div>
+                                    <div class="bg-indigo-50 p-3 rounded shadow-sm">
+                                        <strong class="text-indigo-700">7. Anhang (optional)</strong>
+                                        <p>Ergänzende Materialien wie Interviewtranskripte, Fragebögen, etc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-3">
+                                <p class="text-yellow-700"><strong>Tipp:</strong> Der Umfang der einzelnen Teile sollte ausgewogen sein. Als Faustregel gilt: Einleitung und Fazit zusammen etwa 20%, Hauptteil ca. 80% der Arbeit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Themenfindung -->
+            <section id="themenfindung" class="section-content mb-12">
+                <h2 class="section-heading text-2xl font-bold mb-6 pb-2 border-b-2 border-indigo-200">Themenfindung & Forschungsfrage</h2>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Entwicklung eines Themas</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Die Themenfindung ist ein wichtiger erster Schritt im wissenschaftlichen Arbeitsprozess. Folgende Strategien können dabei helfen:</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Persönliche Interessen nutzen</h4>
+                                    <p>Überlegen Sie, welche Themen Sie persönlich interessieren oder mit denen Sie bereits vertraut sind. Die Motivation bleibt höher, wenn Sie sich für das Thema begeistern können.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Aktuelle Forschung sichten</h4>
+                                    <p>Lesen Sie aktuelle wissenschaftliche Artikel und identifizieren Sie Forschungslücken oder aktuelle Debatten, an die Sie anknüpfen können.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Eigene Stärken einbringen</h4>
+                                    <p>Fragen Sie sich: Wo liegen meine Stärken? Was kann ich gut? Nutzen Sie Ihre Fähigkeiten als Ausgangspunkt für Ihre Themenwahl.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Mind-Mapping</h4>
+                                    <p>Erstellen Sie eine visuelle Darstellung von Ideen und Konzepten, um Zusammenhänge zu erkennen und mögliche Themenfelder zu identifizieren.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-4">
+                                <p class="text-green-700"><strong>Praktische Übung:</strong> Notieren Sie drei Themenbereiche, die Sie interessieren. Führen Sie für jeden Bereich ein Mind-Mapping durch und identifizieren Sie spezifische Aspekte, die für eine wissenschaftliche Arbeit geeignet sein könnten.</p>
+                            </div>
+                            
+                            <p class="mb-3">Bei der Eingrenzung eines Themas sollten Sie folgende Faktoren berücksichtigen:</p>
+                            <ul class="list-disc pl-6 mb-4 space-y-1">
+                                <li>Umfang der Arbeit (Seitenvorgabe)</li>
+                                <li>Verfügbare Zeit</li>
+                                <li>Zugänglichkeit von Quellen und Materialien</li>
+                                <li>Relevanz im Kontext Ihres Studiums</li>
+                                <li>Machbarkeit der Untersuchung</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Formulierung einer Forschungsfrage</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Eine gute Forschungsfrage ist das Herzstück jeder wissenschaftlichen Arbeit. Sie sollte:</p>
+                            
+                            <ul class="list-disc pl-6 mb-4 space-y-1">
+                                <li>Klar und präzise formuliert sein</li>
+                                <li>Den Untersuchungsgegenstand eingrenzen</li>
+                                <li>Wissenschaftlich relevant sein</li>
+                                <li>Im Rahmen der Arbeit beantwortbar sein</li>
+                                <li>Weder zu eng noch zu weit gefasst sein</li>
+                            </ul>
+                            
+                            <p class="mb-3">Typische W-Fragen, die als Ausgangspunkt dienen können:</p>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mb-4">
+                                <div class="bg-indigo-50 p-2 rounded text-center">Wer?</div>
+                                <div class="bg-indigo-50 p-2 rounded text-center">Was?</div>
+                                <div class="bg-indigo-50 p-2 rounded text-center">Wann?</div>
+                                <div class="bg-indigo-50 p-2 rounded text-center">Wo?</div>
+                                <div class="bg-indigo-50 p-2 rounded text-center">Wie?</div>
+                                <div class="bg-indigo-50 p-2 rounded text-center">Warum?</div>
+                            </div>
+                            
+                            <p class="mb-3">Bei der Präzisierung einer Forschungsfrage können folgende Eingrenzungen helfen:</p>
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <ul class="space-y-2">
+                                    <li><strong>Zeitliche Eingrenzung:</strong> "... im Zeitraum von 2010 bis 2020"</li>
+                                    <li><strong>Räumliche Eingrenzung:</strong> "... in Deutschland" oder "... im Raum Berlin"</li>
+                                    <li><strong>Theoretische Eingrenzung:</strong> "... aus Perspektive der Gestaltpsychologie"</li>
+                                    <li><strong>Methodische Eingrenzung:</strong> "... anhand einer qualitativen Inhaltsanalyse"</li>
+                                    <li><strong>Inhaltliche Eingrenzung:</strong> "... mit besonderem Fokus auf ..."</li>
+                                </ul>
+                            </div>
+                            
+                            <p class="mb-4">Beispiele für Forschungsfragen:</p>
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm border-l-4 border-indigo-400">
+                                    <p class="italic mb-2">"Wie hat sich die Darstellung von Frauen in der deutschen Werbung von 1990 bis 2020 verändert?"</p>
+                                    <p class="text-sm text-gray-600">Diese Frage hat eine zeitliche und räumliche Eingrenzung sowie einen klaren Fokus.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm border-l-4 border-indigo-400">
+                                    <p class="italic mb-2">"Inwieweit beeinflussen Dark Patterns im User Interface Design das Nutzerverhalten auf E-Commerce-Websites?"</p>
+                                    <p class="text-sm text-gray-600">Diese Frage hat einen spezifischen Fokus und betrifft ein aktuelles Forschungsfeld.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                <p class="text-yellow-700"><strong>Tipp:</strong> Formulieren Sie zunächst mehrere mögliche Forschungsfragen und prüfen Sie dann, welche am besten geeignet ist. Die Forschungsfrage kann im Laufe des Arbeitsprozesses noch verfeinert werden.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Thesen und Hypothesen</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Auf Basis Ihrer Forschungsfrage können Sie Thesen oder Hypothesen formulieren, die im Verlauf der Arbeit überprüft werden sollen.</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">These</h4>
+                                    <p class="mb-2">Eine These ist eine Behauptung oder Annahme, die argumentativ belegt oder widerlegt werden soll.</p>
+                                    <p class="mb-2"><strong>Beispiel:</strong> "Die zunehmende Digitalisierung führt zu einer Verstärkung sozialer Ungleichheiten."</p>
+                                    <p class="text-sm text-gray-600">Thesen werden oft in geisteswissenschaftlichen Arbeiten verwendet.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Hypothese</h4>
+                                    <p class="mb-2">Eine Hypothese ist eine präzise formulierte, überprüfbare Vermutung über einen Zusammenhang zwischen Variablen.</p>
+                                    <p class="mb-2"><strong>Beispiel:</strong> "Je höher der Bildungsstand einer Person, desto höher ist ihre Bereitschaft, digitale Medien zu nutzen."</p>
+                                    <p class="text-sm text-gray-600">Hypothesen werden oft in empirischen, besonders quantitativen Arbeiten verwendet.</p>
+                                </div>
+                            </div>
+                            
+                            <p class="mb-3">Eine gute Hypothese sollte:</p>
+                            <ul class="list-disc pl-6 mb-4 space-y-1">
+                                <li>Klar und eindeutig sein</li>
+                                <li>Empirisch überprüfbar sein</li>
+                                <li>Aus Theorien oder bisherigen Forschungsergebnissen abgeleitet sein</li>
+                                <li>In Form einer Wenn-Dann-Aussage oder Je-Desto-Aussage formuliert werden können</li>
+                            </ul>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-400 p-4">
+                                <p class="text-green-700"><strong>Übung:</strong> Formulieren Sie zu Ihrer Forschungsfrage eine oder mehrere Thesen bzw. Hypothesen, die Sie in Ihrer Arbeit überprüfen möchten.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Literaturrecherche -->
+            <section id="literaturrecherche" class="section-content mb-12">
+                <h2 class="section-heading text-2xl font-bold mb-6 pb-2 border-b-2 border-indigo-200">Literaturrecherche</h2>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Strategien zur Literaturrecherche</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Eine systematische Literaturrecherche ist fundamental für jede wissenschaftliche Arbeit. Hier sind verschiedene Strategien, die Sie kombinieren sollten:</p>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">1. Systematische Suche</h4>
+                                <div class="bg-white p-4 rounded shadow-sm mb-3">
+                                    <p class="mb-2">Bei der systematischen Suche verwenden Sie definierte Suchbegriffe und -strategien in verschiedenen Datenbanken:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Identifizieren Sie relevante Schlagwörter für Ihr Thema (auch in Englisch)</li>
+                                        <li>Nutzen Sie Boolesche Operatoren (AND, OR, NOT) zur Verfeinerung</li>
+                                        <li>Verwenden Sie Trunkierungen (z.B. "design*" für Design, Designer, designen)</li>
+                                        <li>Setzen Sie Phrasensuche ein (z.B. "User Interface Design")</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <p class="mb-2"><strong>Beispiel für eine Suchstrategie:</strong></p>
+                                    <p class="italic mb-2">("User Experience" OR "UX Design") AND (Mobile OR Smartphone) AND Accessibility</p>
+                                    <p class="text-sm text-gray-600">Diese Suche findet Quellen, die sich mit User Experience oder UX Design im Kontext von mobilen Geräten und Zugänglichkeit befassen.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">2. Schneeballsystem</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <p class="mb-2">Beim Schneeballsystem nutzen Sie die Quellen eines gefundenen relevanten Textes, um weitere Literatur zu finden:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Sichten Sie das Literaturverzeichnis gefundener relevanter Publikationen</li>
+                                        <li>Identifizieren Sie häufig zitierte Autoren oder Standardwerke</li>
+                                        <li>Verwenden Sie auch Zitationsdatenbanken für eine "Vorwärtssuche"</li>
+                                    </ul>
+                                    <p class="mt-2 text-sm text-gray-600">Vorwärtssuche bedeutet: Nachschauen, welche neueren Publikationen den gefundenen Text zitiert haben (möglich z.B. mit Google Scholar).</p>
+                                </div>
+                            </div>
+                            
+                            <p class="mb-3">Wichtige Quellen für die wissenschaftliche Literaturrecherche:</p>
+                            <div class="grid md:grid-cols-3 gap-3 mb-4">
+                                <div class="bg-indigo-50 p-3 rounded">
+                                    <h5 class="font-bold mb-1">Bibliothekskataloge</h5>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Universitätsbibliotheken</li>
+                                        <li>Verbundkataloge</li>
+                                        <li>Nationalbibliothek</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-indigo-50 p-3 rounded">
+                                    <h5 class="font-bold mb-1">Fachdatenbanken</h5>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>JSTOR</li>
+                                        <li>ACM Digital Library</li>
+                                        <li>IEEE Xplore</li>
+                                        <li>Design & Applied Arts Index</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-indigo-50 p-3 rounded">
+                                    <h5 class="font-bold mb-1">Suchmaschinen</h5>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Google Scholar</li>
+                                        <li>BASE (Bielefeld Academic Search Engine)</li>
+                                        <li>Microsoft Academic</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                <p class="text-yellow-700"><strong>Tipp:</strong> Dokumentieren Sie Ihre Suchstrategie von Anfang an systematisch. Notieren Sie verwendete Suchbegriffe, Datenbanken und gefundene relevante Quellen in einer Tabelle oder einem Literaturverwaltungsprogramm.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Bewertung von Quellen</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Nicht alle Quellen sind für wissenschaftliche Arbeiten gleichermaßen geeignet. Eine kritische Bewertung ist daher unerlässlich:</p>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">Qualitätskriterien für wissenschaftliche Quellen</h4>
+                                <ul class="list-disc pl-6 space-y-1">
+                                    <li>Autor: Qualifikation, akademische Position, Publikationsliste</li>
+                                    <li>Publikationsort: Renommierte Fachzeitschrift, Verlag, peer-reviewed</li>
+                                    <li>Aktualität: Erscheinungsjahr, Relevanz für aktuelle Forschung</li>
+                                    <li>Methodische Qualität: Transparenz, Nachvollziehbarkeit, Datengrundlage</li>
+                                    <li>Referenzen: Umfassende und aktuelle Literaturverweise</li>
+                                    <li>Rezeption: Häufigkeit der Zitation in anderen Arbeiten</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="overflow-x-auto mb-4">
+                                <table class="min-w-full bg-white border border-gray-200">
+                                    <thead>
+                                        <tr>
+                                            <th class="border border-gray-200 p-3 bg-gray-50 text-left">Quellenart</th>
+                                            <th class="border border-gray-200 p-3 bg-gray-50 text-left">Eignung für wissenschaftliche Arbeiten</th>
+                                            <th class="border border-gray-200 p-3 bg-gray-50 text-left">Hinweise</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Fachzeitschriften (peer-reviewed)</td>
+                                            <td class="border border-gray-200 p-3 text-green-600">Sehr gut</td>
+                                            <td class="border border-gray-200 p-3">Bevorzugte Quellen, da durch Fachexperten geprüft</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Fachbücher und Monographien</td>
+                                            <td class="border border-gray-200 p-3 text-green-600">Sehr gut</td>
+                                            <td class="border border-gray-200 p-3">Besonders für Grundlagenwissen und etablierte Theorien</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Konferenzbeiträge</td>
+                                            <td class="border border-gray-200 p-3 text-green-600">Gut</td>
+                                            <td class="border border-gray-200 p-3">Oft aktueller als Zeitschriftenartikel, aber unterschiedlich streng geprüft</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Dissertationen und Masterarbeiten</td>
+                                            <td class="border border-gray-200 p-3 text-green-600">Gut</td>
+                                            <td class="border border-gray-200 p-3">Akademisch geprüft, aber unterschiedliche Qualität</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Offizielle Berichte und Statistiken</td>
+                                            <td class="border border-gray-200 p-3 text-green-600">Gut</td>
+                                            <td class="border border-gray-200 p-3">Für empirische Daten und Fakten sehr wertvoll</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Websites und Blogs</td>
+                                            <td class="border border-gray-200 p-3 text-yellow-600">Mit Vorsicht</td>
+                                            <td class="border border-gray-200 p-3">Nur wenn von anerkannten Institutionen oder Experten verfasst</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Wikipedia</td>
+                                            <td class="border border-gray-200 p-3 text-yellow-600">Mit Vorsicht</td>
+                                            <td class="border border-gray-200 p-3">Nur als Einstieg, nicht als zitierbare Quelle</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Populärwissenschaftliche Medien</td>
+                                            <td class="border border-gray-200 p-3 text-yellow-600">Mit Vorsicht</td>
+                                            <td class="border border-gray-200 p-3">Nur für aktuelle Beispiele oder als Einstieg</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Soziale Medien</td>
+                                            <td class="border border-gray-200 p-3 text-red-600">Meist ungeeignet</td>
+                                            <td class="border border-gray-200 p-3">Kann als Untersuchungsgegenstand dienen, aber selten als Quelle</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-4">
+                                <p class="text-green-700"><strong>Übung:</strong> Wählen Sie drei Quellen zu Ihrem Thema aus und bewerten Sie diese anhand der genannten Qualitätskriterien. Entscheiden Sie, welche Quellen Sie für Ihre Arbeit verwenden würden und begründen Sie Ihre Entscheidung.</p>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                <p class="text-yellow-700"><strong>Tipp:</strong> Verlassen Sie sich nicht nur auf die ersten Suchergebnisse. Gute wissenschaftliche Literaturrecherche erfordert Zeit und kritisches Denken. Prüfen Sie gefundene Quellen auf ihre Qualität und Relevanz für Ihre spezifische Fragestellung.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Literaturverwaltung</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Eine systematische Verwaltung Ihrer Quellen erleichtert sowohl den Schreibprozess als auch die Erstellung des Literaturverzeichnisses:</p>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">Manuelle Methoden</h4>
+                                <ul class="list-disc pl-6 space-y-1">
+                                    <li>Karteikarten mit bibliografischen Angaben und wichtigen Inhalten</li>
+                                    <li>Tabellarische Übersicht in Excel oder als Textdokument</li>
+                                    <li>Notizen zu jeder Quelle mit wichtigen Zitaten und Kernaussagen</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">Literaturverwaltungsprogramme</h4>
+                                <p class="mb-2">Diese Programme ermöglichen es, Literatur systematisch zu erfassen, zu organisieren und später beim Zitieren zu nutzen:</p>
+                                <div class="grid md:grid-cols-3 gap-3 mt-3">
+                                    <div class="p-3 border rounded">
+                                        <h5 class="font-bold">Zotero</h5>
+                                        <p class="text-sm">Open Source, kostenlos, Browser-Integration</p>
+                                    </div>
+                                    <div class="p-3 border rounded">
+                                        <h5 class="font-bold">Mendeley</h5>
+                                        <p class="text-sm">Kostenlos, gute Annotationsfunktion, soziales Netzwerk</p>
+                                    </div>
+                                    <div class="p-3 border rounded">
+                                        <h5 class="font-bold">Citavi</h5>
+                                        <p class="text-sm">Umfangreich, Wissensorganisation, für Windows</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <p class="mb-3">Unabhängig von der gewählten Methode sollten Sie folgende Informationen zu jeder Quelle erfassen:</p>
+                            <ul class="list-disc pl-6 mb-4 space-y-1">
+                                <li>Vollständige bibliografische Angaben (Autor, Titel, Jahr, Verlag, etc.)</li>
+                                <li>Standort oder Zugangsweg zur Quelle</li>
+                                <li>Thematische Zuordnung und Relevanz für Ihre Arbeit</li>
+                                <li>Kernaussagen, wichtige Zitate (mit Seitenangaben)</li>
+                                <li>Eigene Gedanken und kritische Anmerkungen zur Quelle</li>
+                            </ul>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                <p class="text-yellow-700"><strong>Tipp:</strong> Beginnen Sie früh mit einer systematischen Literaturverwaltung. Das spart später viel Zeit beim Schreiben und verhindert, dass Sie Quellen erneut suchen müssen oder wichtige Informationen verlieren.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Empirische Methoden -->
+            <section id="methoden" class="section-content mb-12">
+                <h2 class="section-heading text-2xl font-bold mb-6 pb-2 border-b-2 border-indigo-200">Empirische Methoden</h2>
+                
+                <p class="mb-6">Empirische Methoden ermöglichen es, Daten systematisch zu erheben und auszuwerten. Je nach Forschungsfrage können qualitative oder quantitative Methoden oder eine Kombination beider Ansätze sinnvoll sein.</p>
+                
+                <div class="mb-6">
+                    <ul class="nav-tabs flex flex-wrap border-b border-gray-200">
+                        <li class="mr-1">
+                            <a href="#qualitative" class="tab-link inline-block py-2 px-4 bg-white hover:bg-gray-100 rounded-t-lg border-l border-t border-r border-gray-200 active">Qualitative Methoden</a>
+                        </li>
+                        <li class="mr-1">
+                            <a href="#quantitative" class="tab-link inline-block py-2 px-4 bg-white hover:bg-gray-100 rounded-t-lg border-l border-t border-r border-gray-200">Quantitative Methoden</a>
+                        </li>
+                        <li>
+                            <a href="#visuelle" class="tab-link inline-block py-2 px-4 bg-white hover:bg-gray-100 rounded-t-lg border-l border-t border-r border-gray-200">Visuelle Analyse</a>
+                        </li>
+                    </ul>
+                    
+                    <div id="qualitative" class="tab-content bg-white border-l border-r border-b border-gray-200 p-6 rounded-b-lg active">
+                        <h3 class="text-xl font-bold mb-4 text-indigo-700">Qualitative Methoden</h3>
+                        <p class="mb-4">Qualitative Methoden zielen darauf ab, Phänomene in ihrer Tiefe zu verstehen und zu beschreiben. Sie eignen sich besonders für explorative Fragestellungen und die Untersuchung komplexer Zusammenhänge.</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div class="method-card bg-white p-5 rounded-lg shadow-sm border border-gray-200 transition-all duration-300">
+                                <h4 class="font-bold mb-2 text-lg">Interview</h4>
+                                <p class="mb-3">Systematische Befragung von Personen zu einem bestimmten Thema.</p>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Arten:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Leitfadeninterview (semi-strukturiert)</li>
+                                        <li>Narratives Interview (offen)</li>
+                                        <li>Experteninterview</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Schritte:</span>
+                                    <ol class="list-decimal pl-5 text-sm">
+                                        <li>Leitfaden entwickeln</li>
+                                        <li>Interviewpartner identifizieren</li>
+                                        <li>Interview durchführen und aufzeichnen</li>
+                                        <li>Transkription</li>
+                                        <li>Inhaltsanalyse</li>
+                                    </ol>
+                                </div>
+                                <div class="text-sm text-gray-600 mt-2">
+                                    <p><strong>Tipp:</strong> Formulieren Sie offene Fragen (Wie? Warum?), um ausführliche Antworten zu erhalten.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="method-card bg-white p-5 rounded-lg shadow-sm border border-gray-200 transition-all duration-300">
+                                <h4 class="font-bold mb-2 text-lg">Beobachtung</h4>
+                                <p class="mb-3">Systematisches Erfassen, Festhalten und Deuten sinnlich wahrnehmbaren Verhaltens zum Zeitpunkt seines Geschehens.</p>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Arten:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Teilnehmende vs. nicht-teilnehmende Beobachtung</li>
+                                        <li>Strukturierte vs. unstrukturierte Beobachtung</li>
+                                        <li>Offene vs. verdeckte Beobachtung</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Durchführung:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Beobachtungsfeld und -gegenstand festlegen</li>
+                                        <li>Beobachtungsleitfaden erstellen</li>
+                                        <li>Feldnotizen anfertigen</li>
+                                        <li>Protokollierung und Auswertung</li>
+                                    </ul>
+                                </div>
+                                <div class="text-sm text-gray-600 mt-2">
+                                    <p><strong>Tipp:</strong> Trennen Sie in Ihren Aufzeichnungen klar zwischen Beobachtungen und Interpretationen.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div class="method-card bg-white p-5 rounded-lg shadow-sm border border-gray-200 transition-all duration-300">
+                                <h4 class="font-bold mb-2 text-lg">Inhaltsanalyse</h4>
+                                <p class="mb-3">Systematische Analyse von Textmaterial und anderen Kommunikationsformen.</p>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Arten:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Qualitative Inhaltsanalyse nach Mayring</li>
+                                        <li>Diskursanalyse</li>
+                                        <li>Grounded Theory</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Vorgehen:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Material sammeln und aufbereiten</li>
+                                        <li>Kategorien bilden (induktiv oder deduktiv)</li>
+                                        <li>Textstellen codieren</li>
+                                        <li>Auswertung und Interpretation</li>
+                                    </ul>
+                                </div>
+                                <div class="text-sm text-gray-600 mt-2">
+                                    <p><strong>Anwendungsbereiche:</strong> Medientexte, Interviews, historische Dokumente, etc.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="method-card bg-white p-5 rounded-lg shadow-sm border border-gray-200 transition-all duration-300">
+                                <h4 class="font-bold mb-2 text-lg">Fallstudie</h4>
+                                <p class="mb-3">Intensive Untersuchung eines einzelnen Falls, einer Person, Organisation oder eines Ereignisses.</p>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Merkmale:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Ganzheitliche Betrachtung</li>
+                                        <li>Tiefgründige Analyse</li>
+                                        <li>Oft Methodenkombination</li>
+                                        <li>Kontextberücksichtigung</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Einsatzgebiete:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Explorative Forschung</li>
+                                        <li>Theorieentwicklung</li>
+                                        <li>Detaillierte Beschreibung</li>
+                                    </ul>
+                                </div>
+                                <div class="text-sm text-gray-600 mt-2">
+                                    <p><strong>Herausforderung:</strong> Begrenzte Generalisierbarkeit der Ergebnisse</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-4">
+                            <p class="text-green-700"><strong>Übung:</strong> Überlegen Sie, welche qualitative Methode sich für Ihre Forschungsfrage am besten eignen würde. Begründen Sie Ihre Wahl und skizzieren Sie, wie Sie bei der Anwendung dieser Methode vorgehen würden.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="quantitative" class="tab-content bg-white border-l border-r border-b border-gray-200 p-6 rounded-b-lg">
+                        <h3 class="text-xl font-bold mb-4 text-indigo-700">Quantitative Methoden</h3>
+                        <p class="mb-4">Quantitative Methoden zielen darauf ab, numerische Daten zu sammeln und statistische Analysen durchzuführen. Sie eignen sich besonders für die Überprüfung von Hypothesen und die Untersuchung größerer Stichproben.</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div class="method-card bg-white p-5 rounded-lg shadow-sm border border-gray-200 transition-all duration-300">
+                                <h4 class="font-bold mb-2 text-lg">Standardisierte Befragung</h4>
+                                <p class="mb-3">Erhebung von Daten mittels strukturierter Fragebögen.</p>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Formen:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Persönliche Befragung</li>
+                                        <li>Telefonbefragung</li>
+                                        <li>Online-Befragung</li>
+                                        <li>Schriftliche Befragung</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Fragentypen:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Geschlossene Fragen (Multiple Choice)</li>
+                                        <li>Ratingskalen (z.B. Likert-Skala)</li>
+                                        <li>Rangordnungsfragen</li>
+                                        <li>Offene Fragen (für qualitative Ergänzungen)</li>
+                                    </ul>
+                                </div>
+                                <div class="text-sm text-gray-600 mt-2">
+                                    <p><strong>Tipp:</strong> Führen Sie einen Pretest mit einigen Personen durch, um Probleme im Fragebogen zu identifizieren.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="method-card bg-white p-5 rounded-lg shadow-sm border border-gray-200 transition-all duration-300">
+                                <h4 class="font-bold mb-2 text-lg">Experiment</h4>
+                                <p class="mb-3">Untersuchung von Ursache-Wirkungs-Beziehungen unter kontrollierten Bedingungen.</p>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Elemente:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Unabhängige Variable (manipuliert)</li>
+                                        <li>Abhängige Variable (gemessen)</li>
+                                        <li>Experimental- und Kontrollgruppe</li>
+                                        <li>Randomisierung</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Arten:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Laborexperiment</li>
+                                        <li>Feldexperiment</li>
+                                        <li>Online-Experiment</li>
+                                    </ul>
+                                </div>
+                                <div class="text-sm text-gray-600 mt-2">
+                                    <p><strong>Stärke:</strong> Hohe interne Validität durch Kontrolle von Störvariablen</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div class="method-card bg-white p-5 rounded-lg shadow-sm border border-gray-200 transition-all duration-300">
+                                <h4 class="font-bold mb-2 text-lg">Inhaltsanalyse (quantitativ)</h4>
+                                <p class="mb-3">Systematisches Zählen und Messen von Textmerkmalen oder anderen Kommunikationsinhalten.</p>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Vorgehen:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Kategorien- und Codiersystem entwickeln</li>
+                                        <li>Kodierung der Inhalte</li>
+                                        <li>Statistische Auswertung (Häufigkeiten, Korrelationen)</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Anwendungen:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Medienanalyse</li>
+                                        <li>Analyse von Kommunikationsmaterial</li>
+                                        <li>Vergleichende Studien</li>
+                                    </ul>
+                                </div>
+                                <div class="text-sm text-gray-600 mt-2">
+                                    <p><strong>Vorteil:</strong> Ermöglicht die Analyse großer Textmengen</p>
+                                </div>
+                            </div>
+                            
+                            <div class="method-card bg-white p-5 rounded-lg shadow-sm border border-gray-200 transition-all duration-300">
+                                <h4 class="font-bold mb-2 text-lg">Sekundäranalyse</h4>
+                                <p class="mb-3">Analyse bereits vorhandener Daten, die ursprünglich für andere Zwecke erhoben wurden.</p>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Datenquellen:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Amtliche Statistiken</li>
+                                        <li>Frühere Forschungsdaten</li>
+                                        <li>Sozioökonomische Panel</li>
+                                        <li>Nutzungsdaten (z.B. Social Media)</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="text-sm font-medium">Vorteile:</span>
+                                    <ul class="list-disc pl-5 text-sm">
+                                        <li>Zeit- und kostensparend</li>
+                                        <li>Ermöglicht Langzeitvergleiche</li>
+                                        <li>Oft größere Stichproben</li>
+                                    </ul>
+                                </div>
+                                <div class="text-sm text-gray-600 mt-2">
+                                    <p><strong>Herausforderung:</strong> Einschränkungen durch vorgegebene Datenstruktur</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                            <p class="text-yellow-700"><strong>Hinweis:</strong> Quantitative Methoden erfordern oft statistische Kenntnisse und geeignete Software zur Datenanalyse (z.B. SPSS, R, Excel für einfachere Analysen). Planen Sie ausreichend Zeit für die Datenauswertung ein.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="visuelle" class="tab-content bg-white border-l border-r border-b border-gray-200 p-6 rounded-b-lg">
+                        <h3 class="text-xl font-bold mb-4 text-indigo-700">Visuelle Analyse</h3>
+                        <p class="mb-4">Für Studierende im Bereich Design und visuelle Kommunikation sind Methoden zur Analyse visueller Inhalte besonders relevant. Diese Methoden ermöglichen es, Bilder, Layouts, Interfaces und andere visuelle Artefakte systematisch zu untersuchen.</p>
+                        
+                        <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                            <div class="accordion-header flex justify-between items-center">
+                                <h4 class="text-lg font-semibold">Semiotische Analyse</h4>
+                                <i class="fas fa-chevron-down text-gray-500"></i>
+                            </div>
+                            <div class="accordion-content pt-0">
+                                <div class="pt-4">
+                                    <p class="mb-3">Die Semiotik ist die Lehre von den Zeichen und ihrer Bedeutung. In der visuellen Analyse bietet sie ein Werkzeug, um zu verstehen, wie Bedeutung durch Bilder konstruiert wird.</p>
+                                    
+                                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                                        <div class="bg-white p-4 rounded shadow-sm">
+                                            <h5 class="font-bold mb-2 text-indigo-700">Denotation</h5>
+                                            <p>Die grundlegende, wörtliche Bedeutung eines Zeichens oder Bildes.</p>
+                                            <p class="text-sm text-gray-600 mt-2"><strong>Beispiel:</strong> Ein Bild zeigt einen roten Apfel (objektive Beschreibung).</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded shadow-sm">
+                                            <h5 class="font-bold mb-2 text-indigo-700">Konnotation</h5>
+                                            <p>Die kulturell bedingte, assoziative Bedeutung eines Zeichens oder Bildes.</p>
+                                            <p class="text-sm text-gray-600 mt-2"><strong>Beispiel:</strong> Der Apfel wird mit Gesundheit, Sünde oder Wissen assoziiert.</p>
+                                        </div>
+                                        <div class="bg-white p-4 rounded shadow-sm">
+                                            <h5 class="font-bold mb-2 text-indigo-700">Mythos</h5>
+                                            <p>Kulturell etablierte Erzählungen oder Überzeugungen, die durch Zeichen transportiert werden.</p>
+                                            <p class="text-sm text-gray-600 mt-2"><strong>Beispiel:</strong> Der Apfel als Symbol für die Sünde im Garten Eden.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="mb-3">Für eine semiotische Analyse können Sie folgende Schritte durchführen:</p>
+                                    <ol class="list-decimal pl-6 mb-4 space-y-1">
+                                        <li>Beschreiben Sie das Bild auf einer denotativen Ebene (Was ist objektiv zu sehen?)</li>
+                                        <li>Identifizieren Sie die verwendeten Zeichen und Symbole</li>
+                                        <li>Analysieren Sie die konnotativen Bedeutungen dieser Zeichen</li>
+                                        <li>Untersuchen Sie, welche kulturellen Mythen oder Erzählungen angesprochen werden</li>
+                                        <li>Reflektieren Sie über die beabsichtigte Zielgruppe und Wirkung</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                            <div class="accordion-header flex justify-between items-center">
+                                <h4 class="text-lg font-semibold">Gestaltpsychologische Analyse</h4>
+                                <i class="fas fa-chevron-down text-gray-500"></i>
+                            </div>
+                            <div class="accordion-content pt-0">
+                                <div class="pt-4">
+                                    <p class="mb-3">Die Gestaltpsychologie untersucht, wie Menschen visuelle Informationen wahrnehmen und organisieren. Sie bietet wichtige Prinzipien für die Analyse von Design und visueller Kommunikation.</p>
+                                    
+                                    <h5 class="font-bold mb-3">Gestaltgesetze:</h5>
+                                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                        <div class="bg-white p-3 rounded shadow-sm">
+                                            <h6 class="font-bold mb-1">Gesetz der Nähe</h6>
+                                            <p class="text-sm">Elemente, die räumlich nah beieinander liegen, werden als zusammengehörig wahrgenommen.</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded shadow-sm">
+                                            <h6 class="font-bold mb-1">Gesetz der Ähnlichkeit</h6>
+                                            <p class="text-sm">Ähnliche Elemente werden als zusammengehörig wahrgenommen.</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded shadow-sm">
+                                            <h6 class="font-bold mb-1">Gesetz der Prägnanz</h6>
+                                            <p class="text-sm">Visuelle Wahrnehmung tendiert zur einfachsten Organisation.</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded shadow-sm">
+                                            <h6 class="font-bold mb-1">Gesetz der Geschlossenheit</h6>
+                                            <p class="text-sm">Unvollständige Formen werden als vollständig wahrgenommen.</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded shadow-sm">
+                                            <h6 class="font-bold mb-1">Gesetz der Kontinuität</h6>
+                                            <p class="text-sm">Linien werden so wahrgenommen, dass sie dem einfachsten Weg folgen.</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded shadow-sm">
+                                            <h6 class="font-bold mb-1">Gesetz des gemeinsamen Schicksals</h6>
+                                            <p class="text-sm">Elemente, die sich gemeinsam bewegen, werden als Einheit wahrgenommen.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="mb-3">Bei einer gestaltpsychologischen Analyse können Sie untersuchen:</p>
+                                    <ul class="list-disc pl-6 mb-4 space-y-1">
+                                        <li>Wie Gestaltgesetze im Design angewendet werden</li>
+                                        <li>Welche visuellen Hierarchien entstehen</li>
+                                        <li>Wie Aufmerksamkeit gelenkt wird</li>
+                                        <li>Welche Elemente als zusammengehörig wahrgenommen werden</li>
+                                        <li>Wie Figur-Grund-Beziehungen gestaltet sind</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                            <div class="accordion-header flex justify-between items-center">
+                                <h4 class="text-lg font-semibold">Visuelle Kompositionsanalyse</h4>
+                                <i class="fas fa-chevron-down text-gray-500"></i>
+                            </div>
+                            <div class="accordion-content pt-0">
+                                <div class="pt-4">
+                                    <p class="mb-3">Die visuelle Kompositionsanalyse untersucht, wie verschiedene Gestaltungselemente in einem Bild oder Design angeordnet sind und zusammenwirken.</p>
+                                    
+                                    <h5 class="font-bold mb-3">Analyseaspekte:</h5>
+                                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                        <div class="bg-white p-4 rounded shadow-sm">
+                                            <h6 class="font-bold mb-1">Layout und Komposition</h6>
+                                            <ul class="list-disc pl-5 text-sm">
+                                                <li>Raster und Strukturen</li>
+                                                <li>Balance und Symmetrie/Asymmetrie</li>
+                                                <li>Goldener Schnitt</li>
+                                                <li>Blickführung</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-white p-4 rounded shadow-sm">
+                                            <h6 class="font-bold mb-1">Farbanalyse</h6>
+                                            <ul class="list-disc pl-5 text-sm">
+                                                <li>Farbschemata und -kontraste</li>
+                                                <li>Farbpsychologische Wirkung</li>
+                                                <li>Kulturelle Bedeutung von Farben</li>
+                                                <li>Farbharmonie</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-white p-4 rounded shadow-sm">
+                                            <h6 class="font-bold mb-1">Typografie</h6>
+                                            <ul class="list-disc pl-5 text-sm">
+                                                <li>Schriftarten und -klassifikation</li>
+                                                <li>Hierarchie und Lesbarkeit</li>
+                                                <li>Mikro- und Makrotypografie</li>
+                                                <li>Typografische Kontraste</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-white p-4 rounded shadow-sm">
+                                            <h6 class="font-bold mb-1">Bildsprache</h6>
+                                            <ul class="list-disc pl-5 text-sm">
+                                                <li>Bildausschnitt und Perspektive</li>
+                                                <li>Bildbearbeitung und -stil</li>
+                                                <li>Verhältnis von Bild und Text</li>
+                                                <li>Symbolik und visuelle Metaphern</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="mb-3">Für eine methodische Analyse können Sie ein visuelles Material in verschiedene Ebenen zerlegen:</p>
+                                    <ol class="list-decimal pl-6 mb-4 space-y-1">
+                                        <li>Beschreiben Sie zunächst objektiv die sichtbaren Elemente</li>
+                                        <li>Analysieren Sie die formalen Aspekte (Komposition, Farbe, Typografie etc.)</li>
+                                        <li>Untersuchen Sie die gestalterischen Mittel und deren Wirkung</li>
+                                        <li>Interpretieren Sie die Bedeutungsebene und beabsichtigte Wirkung</li>
+                                        <li>Bewerten Sie die Effektivität und Angemessenheit des Designs</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                            <div class="accordion-header flex justify-between items-center">
+                                <h4 class="text-lg font-semibold">Vergleichende Analyse</h4>
+                                <i class="fas fa-chevron-down text-gray-500"></i>
+                            </div>
+                            <div class="accordion-content pt-0">
+                                <div class="pt-4">
+                                    <p class="mb-3">Die vergleichende Analyse ermöglicht es, Gemeinsamkeiten und Unterschiede zwischen verschiedenen visuellen Artefakten systematisch zu untersuchen.</p>
+                                    
+                                    <h5 class="font-bold mb-3">Anwendungsmöglichkeiten:</h5>
+                                    <ul class="list-disc pl-6 mb-4 space-y-1">
+                                        <li>Vergleich von Designs über verschiedene Zeitperioden hinweg</li>
+                                        <li>Vergleich von Designs für unterschiedliche Zielgruppen</li>
+                                        <li>Vergleich von Designs aus verschiedenen kulturellen Kontexten</li>
+                                        <li>Vergleich von verschiedenen Design-Lösungen für ähnliche Probleme</li>
+                                    </ul>
+                                    
+                                    <p class="mb-3">Methodisches Vorgehen beim Vergleich:</p>
+                                    <ol class="list-decimal pl-6 mb-4 space-y-1">
+                                        <li>Definieren Sie klare Vergleichskriterien</li>
+                                        <li>Dokumentieren Sie jedes Beispiel systematisch nach diesen Kriterien</li>
+                                        <li>Identifizieren Sie Gemeinsamkeiten und Unterschiede</li>
+                                        <li>Clustern Sie ähnliche Elemente oder Ansätze</li>
+                                        <li>Analysieren Sie die Gründe für die gefundenen Muster</li>
+                                        <li>Ziehen Sie Schlussfolgerungen aus dem Vergleich</li>
+                                    </ol>
+                                    
+                                    <div class="bg-green-50 border-l-4 border-green-400 p-4">
+                                        <p class="text-green-700"><strong>Tipp für die Visualisierung:</strong> Nutzen Sie visuelle Methoden wie Matrizen, Diagramme oder annotierte Bildvergleiche, um Ihre Ergebnisse anschaulich darzustellen. Dies ist besonders im Designbereich eine effektive Methode, die Ihre analytischen Fähigkeiten demonstriert.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                            <p class="text-yellow-700"><strong>Hinweis:</strong> Die visuelle Analyse sollte nicht bei der bloßen Beschreibung stehen bleiben, sondern immer auch die Funktion, Bedeutung und Wirkung des Designs im jeweiligen Kontext untersuchen. Verbinden Sie Ihre Analyse mit theoretischen Grundlagen und reflektieren Sie kritisch über die gestalterischen Entscheidungen.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Schreibprozess -->
+            <section id="schreibprozess" class="section-content mb-12">
+                <h2 class="section-heading text-2xl font-bold mb-6 pb-2 border-b-2 border-indigo-200">Schreibprozess</h2>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Schreibtypen und Schreibstrategien</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Jeder Mensch hat individuelle Schreibgewohnheiten und -präferenzen. Das Erkennen des eigenen Schreibtyps kann helfen, den Schreibprozess effektiver zu gestalten.</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Strukturierter Schreibtyp</h4>
+                                    <p class="mb-2"><strong>Merkmale:</strong></p>
+                                    <ul class="list-disc pl-6 mb-3 space-y-1">
+                                        <li>Plant detailliert vor dem Schreiben</li>
+                                        <li>Arbeitet systematisch von Anfang bis Ende</li>
+                                        <li>Braucht klare Gliederung</li>
+                                        <li>Überarbeitet erst am Ende</li>
+                                    </ul>
+                                    <p class="mb-2"><strong>Tipps:</strong></p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Erstellen Sie detaillierte Gliederungen</li>
+                                        <li>Setzen Sie sich konkrete Meilensteine</li>
+                                        <li>Planen Sie ausreichend Zeit für die Recherche ein</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Kreativer Schreibtyp</h4>
+                                    <p class="mb-2"><strong>Merkmale:</strong></p>
+                                    <ul class="list-disc pl-6 mb-3 space-y-1">
+                                        <li>Beginnt oft ohne detaillierten Plan</li>
+                                        <li>Schreibt nicht unbedingt linear</li>
+                                        <li>Kann gut mit Schreibblockaden umgehen</li>
+                                        <li>Überarbeitet während des Schreibens</li>
+                                    </ul>
+                                    <p class="mb-2"><strong>Tipps:</strong></p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Nutzen Sie Mind-Maps statt linearer Gliederungen</li>
+                                        <li>Planen Sie mehr Zeit für die Überarbeitung ein</li>
+                                        <li>Setzen Sie sich Zeitlimits für kreative Phasen</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Perfektionistischer Schreibtyp</h4>
+                                    <p class="mb-2"><strong>Merkmale:</strong></p>
+                                    <ul class="list-disc pl-6 mb-3 space-y-1">
+                                        <li>Feilt lange an einzelnen Formulierungen</li>
+                                        <li>Strebt nach der perfekten Erstversion</li>
+                                        <li>Recherchiert sehr gründlich</li>
+                                        <li>Kann unter Zeitdruck Schwierigkeiten haben</li>
+                                    </ul>
+                                    <p class="mb-2"><strong>Tipps:</strong></p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Trennen Sie Schreiben und Überarbeiten bewusst</li>
+                                        <li>Setzen Sie sich Zeitlimits für die Recherche</li>
+                                        <li>Arbeiten Sie mit vorläufigen Versionen</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Spontaner Schreibtyp</h4>
+                                    <p class="mb-2"><strong>Merkmale:</strong></p>
+                                    <ul class="list-disc pl-6 mb-3 space-y-1">
+                                        <li>Schreibt am besten unter Zeitdruck</li>
+                                        <li>Arbeitet oft in intensiven Schreibphasen</li>
+                                        <li>Kann lange mit dem Anfangen warten</li>
+                                        <li>Denkt beim Schreiben</li>
+                                    </ul>
+                                    <p class="mb-2"><strong>Tipps:</strong></p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Setzen Sie sich künstliche Deadlines</li>
+                                        <li>Planen Sie intensive Schreibblöcke ein</li>
+                                        <li>Beginnen Sie früh mit Notizen und Fragmenten</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                                <p class="text-yellow-700"><strong>Tipp:</strong> Die meisten Menschen sind Mischtypen mit Tendenzen zu bestimmten Schreibstilen. Experimentieren Sie mit verschiedenen Strategien und finden Sie heraus, was für Sie am besten funktioniert.</p>
+                            </div>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-400 p-4">
+                                <p class="text-green-700"><strong>Selbsttest:</strong> Überlegen Sie, welche Beschreibung am ehesten auf Sie zutrifft. Wie gehen Sie typischerweise an Schreibaufgaben heran? Was funktioniert für Sie gut, und wo haben Sie Schwierigkeiten?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Aufbau einer wissenschaftlichen Arbeit</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Eine wissenschaftliche Arbeit folgt einer klaren Struktur, die dem Leser die Orientierung erleichtert und die Nachvollziehbarkeit sicherstellt:</p>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">1. Deckblatt</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <p class="mb-2">Das Deckblatt enthält alle wichtigen Informationen zur Arbeit:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Titel der Arbeit</li>
+                                        <li>Art der Arbeit (Hausarbeit, Bachelorarbeit, etc.)</li>
+                                        <li>Name der Hochschule und des Fachbereichs</li>
+                                        <li>Name des Seminars/Moduls und des Dozenten</li>
+                                        <li>Name des Verfassers und Matrikelnummer</li>
+                                        <li>Abgabedatum</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">2. Inhaltsverzeichnis</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <p class="mb-2">Das Inhaltsverzeichnis gibt einen Überblick über die Gliederung der Arbeit:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Vollständige Auflistung aller Kapitel und Unterkapitel</li>
+                                        <li>Entsprechende Seitenzahlen</li>
+                                        <li>Konsequente Nummerierung (z.B. 1, 1.1, 1.1.1)</li>
+                                        <li>In der Regel maximal drei Gliederungsebenen</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">3. Einleitung</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <p class="mb-2">Die Einleitung führt in das Thema ein und begründet die Relevanz der Arbeit:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Hinführung zum Thema</li>
+                                        <li>Problemstellung und Relevanz</li>
+                                        <li>Forschungsfrage und/oder Zielsetzung</li>
+                                        <li>Kurzer Überblick über den Aufbau der Arbeit</li>
+                                        <li>Eingrenzung des Themas</li>
+                                    </ul>
+                                    <p class="mt-2 text-sm text-gray-600">Umfang: ca. 10% der Gesamtarbeit</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">4. Hauptteil</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <p class="mb-2">Der Hauptteil bildet den Kern der Arbeit und umfasst in der Regel folgende Elemente:</p>
+                                    
+                                    <h5 class="font-semibold mb-1">4.1 Theoretischer Teil / Literaturüberblick</h5>
+                                    <ul class="list-disc pl-6 mb-3 space-y-1">
+                                        <li>Darstellung des Forschungsstands</li>
+                                        <li>Erklärung relevanter Begriffe und Konzepte</li>
+                                        <li>Darstellung theoretischer Grundlagen</li>
+                                    </ul>
+                                    
+                                    <h5 class="font-semibold mb-1">4.2 Methodischer Teil</h5>
+                                    <ul class="list-disc pl-6 mb-3 space-y-1">
+                                        <li>Beschreibung der Forschungsmethode</li>
+                                        <li>Begründung der Methodenwahl</li>
+                                        <li>Beschreibung der Datenerhebung und -auswertung</li>
+                                    </ul>
+                                    
+                                    <h5 class="font-semibold mb-1">4.3 Empirischer Teil / Ergebnisse</h5>
+                                    <ul class="list-disc pl-6 mb-3 space-y-1">
+                                        <li>Präsentation der Forschungsergebnisse</li>
+                                        <li>Ggf. Visualisierung durch Tabellen, Grafiken, etc.</li>
+                                        <li>Analyse und Interpretation der Ergebnisse</li>
+                                    </ul>
+                                    
+                                    <h5 class="font-semibold mb-1">4.4 Diskussion</h5>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Kritische Auseinandersetzung mit den Ergebnissen</li>
+                                        <li>Vergleich mit bisherigen Forschungsergebnissen</li>
+                                        <li>Diskussion von Limitationen der eigenen Forschung</li>
+                                    </ul>
+                                    
+                                    <p class="mt-2 text-sm text-gray-600">Umfang: ca. 80% der Gesamtarbeit</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">5. Fazit</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <p class="mb-2">Das Fazit fasst die wichtigsten Ergebnisse zusammen und gibt einen Ausblick:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Zusammenfassung der wichtigsten Erkenntnisse</li>
+                                        <li>Beantwortung der Forschungsfrage</li>
+                                        <li>Reflexion über die Bedeutung der Ergebnisse</li>
+                                        <li>Ausblick auf offene Fragen und weiteren Forschungsbedarf</li>
+                                    </ul>
+                                    <p class="mt-2 text-sm text-gray-600">Umfang: ca. 10% der Gesamtarbeit</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">6. Literaturverzeichnis</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <p class="mb-2">Das Literaturverzeichnis enthält alle verwendeten Quellen in alphabetischer Reihenfolge:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Vollständige bibliografische Angaben</li>
+                                        <li>Einheitliches Zitationsformat (z.B. APA)</li>
+                                        <li>Nur Quellen, die im Text tatsächlich zitiert wurden</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-bold mb-3 text-indigo-700">7. Anhang (optional)</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <p class="mb-2">Der Anhang enthält ergänzende Materialien, die für das Verständnis der Arbeit hilfreich, aber für den Haupttext zu umfangreich sind:</p>
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Umfangreiche Tabellen oder Grafiken</li>
+                                        <li>Interviewleitfäden oder Fragebögen</li>
+                                        <li>Transkripte von Interviews</li>
+                                        <li>Zusätzliches Bildmaterial</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                <p class="text-yellow-700"><strong>Hinweis:</strong> Die genaue Struktur kann je nach Fachbereich, Hochschule und Art der Arbeit variieren. Informieren Sie sich über die spezifischen Anforderungen Ihres Fachbereichs oder Dozenten.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Tipps zum wissenschaftlichen Schreiben</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Wissenschaftliches Schreiben unterscheidet sich von anderen Textformen durch seinen sachlichen Stil, seine klare Struktur und seine Präzision. Hier sind einige Tipps, die Ihnen beim Verfassen Ihrer Arbeit helfen können:</p>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">Sprache und Stil</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Verwenden Sie eine klare, sachliche Sprache ohne umgangssprachliche Wendungen</li>
+                                        <li>Vermeiden Sie Ich-Form (außer in reflektierenden Passagen)</li>
+                                        <li>Nutzen Sie Fachbegriffe präzise und erklären Sie sie bei der ersten Verwendung</li>
+                                        <li>Vermeiden Sie übermäßig komplizierte Satzstrukturen</li>
+                                        <li>Achten Sie auf eine geschlechtsneutrale Sprache</li>
+                                        <li>Setzen Sie Fremdwörter nur ein, wenn sie präziser sind als deutsche Begriffe</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">Argumentation</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Bauen Sie eine logische Argumentationskette auf</li>
+                                        <li>Belegen Sie Behauptungen durch Quellen oder eigene Daten</li>
+                                        <li>Verwenden Sie Überleitungen zwischen Absätzen und Kapiteln</li>
+                                        <li>Unterscheiden Sie klar zwischen eigenen Meinungen und wissenschaftlichen Erkenntnissen</li>
+                                        <li>Betrachten Sie Themen aus verschiedenen Perspektiven</li>
+                                        <li>Vermeiden Sie Verallgemeinerungen und absolute Aussagen</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">Formalia</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Verwenden Sie ein einheitliches Formatierungssystem</li>
+                                        <li>Nummerieren Sie Abbildungen und Tabellen durchgängig</li>
+                                        <li>Fügen Sie Quellenverweise korrekt und konsistent ein</li>
+                                        <li>Achten Sie auf eine logische Kapitelstruktur</li>
+                                        <li>Verwenden Sie aussagekräftige Überschriften</li>
+                                        <li>Halten Sie sich an vorgegebene Formatierungsrichtlinien (Seitenränder, Zeilenabstand, etc.)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">Überarbeitung</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Planen Sie ausreichend Zeit für mehrere Überarbeitungsdurchgänge ein</li>
+                                        <li>Prüfen Sie zunächst Struktur und Argumentation (Makroebene)</li>
+                                        <li>Überprüfen Sie anschließend Sprache und Stil (Mikroebene)</li>
+                                        <li>Kontrollieren Sie Rechtschreibung, Grammatik und Zeichensetzung</li>
+                                        <li>Bitten Sie eine andere Person um Feedback</li>
+                                        <li>Prüfen Sie alle Quellenangaben auf Vollständigkeit und Korrektheit</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-4">
+                                <p class="text-green-700"><strong>Übung:</strong> Nehmen Sie einen Absatz aus einer wissenschaftlichen Quelle und analysieren Sie die sprachlichen Merkmale. Versuchen Sie dann, einen eigenen Absatz zu Ihrem Thema im wissenschaftlichen Stil zu formulieren.</p>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                <p class="text-yellow-700"><strong>Tipp:</strong> Lesen Sie regelmäßig wissenschaftliche Texte in Ihrem Fachgebiet. Dies hilft Ihnen, ein Gefühl für den wissenschaftlichen Stil zu entwickeln und Ihr Vokabular zu erweitern.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Umgang mit Schreibblockaden</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Schreibblockaden sind ein häufiges Phänomen beim wissenschaftlichen Arbeiten. Hier sind einige Strategien, die Ihnen helfen können, solche Blockaden zu überwinden:</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Freies Schreiben</h4>
+                                    <p class="mb-2">Schreiben Sie ohne Unterbrechung für 10-15 Minuten, ohne auf Fehler oder Qualität zu achten. Dies kann helfen, den inneren Kritiker auszuschalten und ins Schreiben zu kommen.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Pomodoro-Technik</h4>
+                                    <p class="mb-2">Arbeiten Sie in kurzen, fokussierten Intervallen (z.B. 25 Minuten) mit anschließenden kurzen Pausen. Dies kann die Konzentration verbessern und die Motivation steigern.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Mind-Mapping</h4>
+                                    <p class="mb-2">Erstellen Sie eine visuelle Darstellung Ihrer Gedanken und Ideen. Dies kann helfen, Zusammenhänge zu erkennen und die Struktur Ihrer Arbeit zu klären.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Ortswechsel</h4>
+                                    <p class="mb-2">Manchmal hilft ein Wechsel der Umgebung, um neue Perspektiven zu gewinnen. Probieren Sie verschiedene Arbeitsorte aus (Bibliothek, Café, Park).</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Nicht-lineares Schreiben</h4>
+                                    <p class="mb-2">Beginnen Sie mit dem Abschnitt, der Ihnen am leichtesten fällt, nicht unbedingt mit der Einleitung. Sie können die verschiedenen Teile später zusammenfügen.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Schreibgespräche</h4>
+                                    <p class="mb-2">Diskutieren Sie Ihre Ideen mit anderen. Oft kann das Erklären eines Konzepts helfen, die eigenen Gedanken zu klären.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Bewusste Pausen</h4>
+                                    <p class="mb-2">Machen Sie regelmäßige Pausen und nutzen Sie diese für Bewegung oder Entspannung. Ein erholtes Gehirn arbeitet effizienter.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Schreibtagebuch</h4>
+                                    <p class="mb-2">Führen Sie ein Tagebuch über Ihren Schreibprozess, um Muster zu erkennen und erfolgreiche Strategien zu identifizieren.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                <p class="text-yellow-700"><strong>Wichtig:</strong> Schreibblockaden sind oft ein Zeichen für überhöhte Ansprüche an sich selbst. Erinnern Sie sich daran, dass die erste Version nie perfekt sein muss – sie muss nur existieren, damit Sie sie überarbeiten können.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Zitieren -->
+            <section id="zitieren" class="section-content mb-12">
+                <h2 class="section-heading text-2xl font-bold mb-6 pb-2 border-b-2 border-indigo-200">Zitieren</h2>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Grundlagen des Zitierens</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Korrektes Zitieren ist ein wesentlicher Bestandteil wissenschaftlichen Arbeitens. Es erfüllt mehrere wichtige Funktionen:</p>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">Warum zitieren wir?</h4>
+                                <ul class="list-disc pl-6 space-y-1">
+                                    <li><strong>Anerkennung geistigen Eigentums:</strong> Wir würdigen die Leistungen anderer Wissenschaftler</li>
+                                    <li><strong>Überprüfbarkeit:</strong> Leser können die verwendeten Quellen nachvollziehen und überprüfen</li>
+                                    <li><strong>Wissenschaftliche Vernetzung:</strong> Zitate bilden ein Netz von Verbindungen zwischen verschiedenen Arbeiten</li>
+                                    <li><strong>Absicherung von Aussagen:</strong> Wir stützen unsere Argumente auf anerkannte Quellen</li>
+                                    <li><strong>Abgrenzung eigener Gedanken:</strong> Wir machen deutlich, welche Ideen von uns stammen und welche nicht</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">Arten des Zitierens</h4>
+                                <div class="grid md:grid-cols-2 gap-4 mb-3">
+                                    <div>
+                                        <h5 class="font-semibold mb-1">Direktes Zitat</h5>
+                                        <p class="text-sm">Wörtliche Übernahme eines Textes, der in Anführungszeichen gesetzt wird.</p>
+                                        <p class="text-sm italic mt-1">Beispiel: Laut Müller (2020, S. 45) ist "Design nicht nur, wie etwas aussieht, sondern wie es funktioniert."</p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold mb-1">Indirektes Zitat</h5>
+                                        <p class="text-sm">Sinngemäße Wiedergabe eines Gedankens in eigenen Worten.</p>
+                                        <p class="text-sm italic mt-1">Beispiel: Müller (2020) betont, dass Design sowohl ästhetische als auch funktionale Aspekte umfasst.</p>
+                                    </div>
+                                </div>
+                                <p class="mb-2">Bei direkten Zitaten:</p>
+                                <ul class="list-disc pl-6 mb-3 space-y-1">
+                                    <li>Exakte Wiedergabe des Originaltextes (inkl. Rechtschreibfehler mit [sic])</li>
+                                    <li>Auslassungen mit [...] kennzeichnen</li>
+                                    <li>Eigene Ergänzungen in eckigen Klammern [Ergänzung]</li>
+                                    <li>Immer mit Seitenangabe</li>
+                                </ul>
+                                <p class="mb-2">Bei indirekten Zitaten:</p>
+                                <ul class="list-disc pl-6 space-y-1">
+                                    <li>Sinngemäße Wiedergabe in eigenen Worten</li>
+                                    <li>Seitenangabe empfohlen, aber nicht immer zwingend</li>
+                                    <li>Klar erkennbar machen, wo fremdes Gedankengut beginnt und endet</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                                <p class="text-yellow-700"><strong>Achtung:</strong> Fehlendes oder falsches Zitieren kann als Plagiat gewertet werden, was schwerwiegende akademische Konsequenzen haben kann. Seien Sie besonders sorgfältig bei der Kennzeichnung fremden Gedankenguts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Zitierstile</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Es gibt verschiedene standardisierte Zitierstile, die jeweils eigene Regeln für die Quellenangabe im Text und im Literaturverzeichnis vorgeben. An der HMKW wird in der Regel der APA-Stil verwendet:</p>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">APA-Stil (American Psychological Association)</h4>
+                                <p class="mb-2">Der APA-Stil ist ein Autor-Jahr-System, bei dem die Quellenangaben in Klammern direkt im Text stehen:</p>
+                                
+                                <h5 class="font-semibold mb-1">Quellenangaben im Text:</h5>
+                                <div class="bg-gray-50 p-3 rounded mb-3">
+                                    <ul class="list-disc pl-6 space-y-1">
+                                        <li>Ein Autor: (Müller, 2020)</li>
+                                        <li>Zwei Autoren: (Müller & Schmidt, 2020)</li>
+                                        <li>Drei oder mehr Autoren: (Müller et al., 2020)</li>
+                                        <li>Direkte Zitate: (Müller, 2020, S. 45)</li>
+                                        <li>Mehrere Quellen: (Müller, 2020; Schmidt, 2018)</li>
+                                    </ul>
+                                </div>
+                                
+                                <h5 class="font-semibold mb-1">Quellenangaben im Literaturverzeichnis:</h5>
+                                <div class="bg-gray-50 p-3 rounded mb-3">
+                                    <p class="mb-2"><strong>Buch:</strong></p>
+                                    <p class="text-sm mb-2">Nachname, V. (Jahr). <em>Titel des Buches</em>. Verlag.</p>
+                                    <p class="text-sm italic mb-3">Beispiel: Müller, A. (2020). <em>Einführung in das Design</em>. Musterverlag.</p>
+                                    
+                                    <p class="mb-2"><strong>Zeitschriftenartikel:</strong></p>
+                                    <p class="text-sm mb-2">Nachname, V. (Jahr). Titel des Artikels. <em>Name der Zeitschrift, Volume</em>(Ausgabe), Seitenbereich.</p>
+                                    <p class="text-sm italic mb-3">Beispiel: Schmidt, B. (2018). User Experience im digitalen Zeitalter. <em>Journal für Designforschung, 12</em>(3), 45-67.</p>
+                                    
+                                    <p class="mb-2"><strong>Internetquelle:</strong></p>
+                                    <p class="text-sm mb-2">Nachname, V. (Jahr). Titel des Beitrags. <em>Name der Website</em>. URL</p>
+                                    <p class="text-sm italic">Beispiel: Meier, C. (2021). Barrierefreies Webdesign. <em>Designblog</em>. https://www.designblog.de/barrierefreies-webdesign</p>
+                                </div>
+                                
+                                <p class="text-sm text-gray-600">Weitere Details zum APA-Stil finden Sie im Zitationsguide der HMKW.</p>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">Andere gängige Zitierstile</h4>
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full border border-gray-200">
+                                        <thead>
+                                            <tr>
+                                                <th class="border border-gray-200 p-3 bg-gray-50 text-left">Zitierstil</th>
+                                                <th class="border border-gray-200 p-3 bg-gray-50 text-left">Beschreibung</th>
+                                                <th class="border border-gray-200 p-3 bg-gray-50 text-left">Beispiel</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="border border-gray-200 p-3 font-medium">Chicago Style</td>
+                                                <td class="border border-gray-200 p-3">Bietet zwei Varianten: Author-Date und Notes-Bibliography</td>
+                                                <td class="border border-gray-200 p-3 text-sm">Müller, Anna. 2020. Einführung in das Design. München: Musterverlag.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="border border-gray-200 p-3 font-medium">MLA Style</td>
+                                                <td class="border border-gray-200 p-3">Häufig in den Geisteswissenschaften verwendet</td>
+                                                <td class="border border-gray-200 p-3 text-sm">Müller, Anna. Einführung in das Design. Musterverlag, 2020.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="border border-gray-200 p-3 font-medium">Harvard Style</td>
+                                                <td class="border border-gray-200 p-3">Ähnlich wie APA, mit kleinen Unterschieden</td>
+                                                <td class="border border-gray-200 p-3 text-sm">MÜLLER, A. (2020) Einführung in das Design. München: Musterverlag.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-4">
+                                <p class="text-green-700"><strong>Übung:</strong> Suchen Sie eine Quelle zu Ihrem Thema und erstellen Sie jeweils eine korrekte Quellenangabe im Text und im Literaturverzeichnis nach dem APA-Stil.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Beispiele für verschiedene Quellenarten</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Je nach Art der Quelle gibt es unterschiedliche Regeln für die vollständige bibliografische Angabe im Literaturverzeichnis:</p>
+                            
+                            <div class="overflow-x-auto mb-4">
+                                <table class="min-w-full border border-gray-200">
+                                    <thead>
+                                        <tr>
+                                            <th class="border border-gray-200 p-3 bg-gray-50 text-left">Quellenart</th>
+                                            <th class="border border-gray-200 p-3 bg-gray-50 text-left">Format (APA-Stil)</th>
+                                            <th class="border border-gray-200 p-3 bg-gray-50 text-left">Beispiel</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Buch mit einem Autor</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Nachname, V. (Jahr). <em>Titel des Buches</em>. Verlag.</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Müller, A. (2020). <em>Einführung in das Design</em>. Musterverlag.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Buch mit mehreren Autoren</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Nachname1, V., Nachname2, V., & Nachname3, V. (Jahr). <em>Titel des Buches</em>. Verlag.</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Müller, A., Schmidt, B., & Meyer, C. (2020). <em>Grundlagen des Webdesigns</em>. Musterverlag.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Kapitel in einem Sammelband</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Nachname, V. (Jahr). Titel des Kapitels. In V. Herausgeber (Hrsg.), <em>Titel des Sammelbandes</em> (S. XX-XX). Verlag.</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Weber, D. (2019). Visuelle Kommunikation im digitalen Zeitalter. In M. König (Hrsg.), <em>Handbuch der Designforschung</em> (S. 123-145). Wissenschaftsverlag.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Zeitschriftenartikel</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Nachname, V. (Jahr). Titel des Artikels. <em>Name der Zeitschrift, Volume</em>(Ausgabe), Seitenbereich.</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Schmidt, B. (2018). User Experience im digitalen Zeitalter. <em>Journal für Designforschung, 12</em>(3), 45-67.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Online-Zeitschriftenartikel mit DOI</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Nachname, V. (Jahr). Titel des Artikels. <em>Name der Zeitschrift, Volume</em>(Ausgabe), Seitenbereich. https://doi.org/xxxxx</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Meyer, C. (2021). Interaktionsdesign für mobile Anwendungen. <em>Digital Design Journal, 5</em>(2), 78-92. https://doi.org/10.1234/ddj.2021.5.2.78</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Webseite</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Nachname, V. (Jahr). Titel des Beitrags. <em>Name der Website</em>. URL</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Fischer, E. (2022). Prinzipien des barrierefreien Designs. <em>Designportal</em>. https://www.designportal.de/barrierefreies-design</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-gray-200 p-3 font-medium">Hochschulschrift</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Nachname, V. (Jahr). <em>Titel der Arbeit</em> [Art der Arbeit, Institution]. Repositorium/Datenbank.</td>
+                                            <td class="border border-gray-200 p-3 text-sm">Wagner, F. (2020). <em>Nutzerzentrierung im Interface Design</em> [Masterarbeit, Universität Berlin]. Hochschulschriftenserver.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                                <p class="text-yellow-700"><strong>Tipp:</strong> Bei ungewöhnlichen Quellenarten wie Podcasts, Social-Media-Beiträgen oder Software konsultieren Sie die aktuellen APA-Richtlinien oder den Zitationsguide Ihrer Hochschule.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Vermeidung von Plagiaten</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <p class="mb-3">Ein Plagiat liegt vor, wenn fremdes geistiges Eigentum ohne ausreichende Kennzeichnung übernommen wird. Dies gilt als wissenschaftliches Fehlverhalten und kann schwerwiegende Konsequenzen haben.</p>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">Formen von Plagiaten</h4>
+                                <ul class="list-disc pl-6 space-y-1">
+                                    <li><strong>Vollplagiat:</strong> Komplette Übernahme eines fremden Textes ohne Quellenangabe</li>
+                                    <li><strong>Teilplagiat:</strong> Übernahme von Textpassagen ohne Quellenangabe</li>
+                                    <li><strong>Ideenplagiat:</strong> Verwendung fremder Ideen oder Argumentationsstrukturen ohne Verweis</li>
+                                    <li><strong>Selbstplagiat:</strong> Wiederverwendung eigener, bereits publizierter Texte ohne Kennzeichnung</li>
+                                    <li><strong>Übersetzungsplagiat:</strong> Übersetzung fremdsprachiger Texte ohne Quellenangabe</li>
+                                    <li><strong>Strukturplagiat:</strong> Übernahme der Gliederung oder Struktur eines fremden Werks</li>
+                                    <li><strong>Ghostwriting:</strong> Einreichen fremder Arbeit unter eigenem Namen</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">Strategien zur Vermeidung von Plagiaten</h4>
+                                <ul class="list-disc pl-6 space-y-1">
+                                    <li>Führen Sie bereits während der Recherche genau Buch über Ihre Quellen</li>
+                                    <li>Kennzeichnen Sie in Ihren Notizen klar, was ein direktes Zitat ist</li>
+                                    <li>Paraphrasieren Sie in eigenen Worten und geben Sie trotzdem die Quelle an</li>
+                                    <li>Überprüfen Sie regelmäßig, ob alle übernommenen Gedanken gekennzeichnet sind</li>
+                                    <li>Lernen Sie die Regeln des korrekten Zitierens</li>
+                                    <li>Planen Sie genügend Zeit ein, um nicht unter Zeitdruck in Versuchung zu geraten</li>
+                                    <li>Nutzen Sie bei Unsicherheit Plagiatsprüfungssoftware</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-red-50 border-l-4 border-red-400 p-4">
+                                <p class="text-red-700"><strong>Wichtig:</strong> Die Konsequenzen eines Plagiats können von Punktabzug über das Nichtbestehen der Prüfungsleistung bis hin zur Exmatrikulation oder dem Entzug akademischer Grade reichen. Nehmen Sie korrektes Zitieren ernst und holen Sie im Zweifelsfall Rat bei Ihren Dozierenden ein.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Zeitplanung -->
+            <section id="zeitplanung" class="section-content mb-12">
+                <h2 class="section-heading text-2xl font-bold mb-6 pb-2 border-b-2 border-indigo-200">Zeitplanung</h2>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <p class="mb-4">Eine realistische Zeitplanung ist entscheidend für den Erfolg Ihrer wissenschaftlichen Arbeit. Der folgende Zeitplan gibt Ihnen einen Überblick über die typischen Phasen einer Hausarbeit und deren zeitliche Einordnung.</p>
+                    
+                    <div class="relative pl-8 mb-6">
+                        <div class="timeline-item pl-8 pb-6">
+                            <h3 class="text-lg font-bold text-indigo-700 mb-2">Orientierungsphase (ca. 2-3 Wochen)</h3>
+                            <ul class="list-disc pl-6 space-y-1">
+                                <li>Thema finden und eingrenzen</li>
+                                <li>Erste Literaturrecherche und -sichtung</li>
+                                <li>Problemstellung festlegen</li>
+                                <li>Forschungsfrage und Zielsetzung definieren</li>
+                                <li>Methodisches Vorgehen überlegen</li>
+                                <li>Ggf. Probanden suchen und kontaktieren</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item pl-8 pb-6">
+                            <h3 class="text-lg font-bold text-indigo-700 mb-2">Recherche- und Materialbeschaffungsphase (ca. 2-3 Wochen)</h3>
+                            <ul class="list-disc pl-6 space-y-1">
+                                <li>Intensive Literatursuche und -analyse</li>
+                                <li>Materialbeschaffung (Bücher, Artikel, Bild- und Videomaterial)</li>
+                                <li>Erstellung von Exzerpten und Notizen</li>
+                                <li>Verfeinern der Gliederung</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item pl-8 pb-6">
+                            <h3 class="text-lg font-bold text-indigo-700 mb-2">Erhebungs- und Auswertungsphase (ca. 2-3 Wochen)</h3>
+                            <ul class="list-disc pl-6 space-y-1">
+                                <li>Daten erheben (Interviews führen, Beobachtungen durchführen, etc.)</li>
+                                <li>Daten auswerten und analysieren</li>
+                                <li>Ergebnisse systematisieren</li>
+                                <li>Visualisierungen erstellen (Grafiken, Tabellen)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item pl-8 pb-6">
+                            <h3 class="text-lg font-bold text-indigo-700 mb-2">Schreibphase (ca. 3-4 Wochen)</h3>
+                            <ul class="list-disc pl-6 space-y-1">
+                                <li>Einleitung und Stand der Forschung verfassen</li>
+                                <li>Methoden-/Untersuchungskapitel schreiben</li>
+                                <li>Ergebnisteil ausarbeiten</li>
+                                <li>Diskussion und Fazit formulieren</li>
+                                <li>Rohfassung überarbeiten</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item pl-8 pb-6">
+                            <h3 class="text-lg font-bold text-indigo-700 mb-2">Abschlussphase (ca. 1-2 Wochen)</h3>
+                            <ul class="list-disc pl-6 space-y-1">
+                                <li>Korrekturlesen (lassen)</li>
+                                <li>Literaturverzeichnis und Anhang fertigstellen</li>
+                                <li>Plagiatsprüfung durchführen</li>
+                                <li>Layout und Formatierung überprüfen</li>
+                                <li>Deckblatt, Inhaltsverzeichnis, Abbildungsverzeichnis erstellen</li>
+                                <li>Endgültige Version erstellen und abgeben</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                        <p class="text-yellow-700"><strong>Tipp:</strong> Planen Sie bewusst Pufferzeiten ein. Fast immer dauern einzelne Phasen länger als erwartet, besonders die Literaturrecherche und die Überarbeitung. Reservieren Sie außerdem Zeit für unvorhergesehene Ereignisse wie technische Probleme oder Krankheit.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Zeitmanagement-Strategien</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Rückwärtsplanung</h4>
+                                    <p class="mb-2">Starten Sie mit dem Abgabetermin und planen Sie von dort aus rückwärts. Legen Sie Meilensteine für jede Phase fest.</p>
+                                    <p class="text-sm text-gray-600">Beispiel: Bei Abgabe am 15. März sollte die Rohfassung spätestens am 1. März fertig sein, die Datenerhebung bis Mitte Februar abgeschlossen sein, usw.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Chunking</h4>
+                                    <p class="mb-2">Teilen Sie große Aufgaben in kleinere, überschaubare Teilaufgaben auf, die Sie in einzelnen Arbeitssitzungen bewältigen können.</p>
+                                    <p class="text-sm text-gray-600">Beispiel: "Literaturrecherche durchführen" wird zu "5 relevante Artikel finden", "Artikel 1 lesen und exzerpieren", etc.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Eisenhower-Prinzip</h4>
+                                    <p class="mb-2">Priorisieren Sie Aufgaben nach Wichtigkeit und Dringlichkeit:</p>
+                                    <ul class="list-disc pl-6 space-y-1 text-sm">
+                                        <li><strong>Wichtig & dringend:</strong> Sofort erledigen</li>
+                                        <li><strong>Wichtig & nicht dringend:</strong> Einplanen</li>
+                                        <li><strong>Nicht wichtig & dringend:</strong> Delegieren</li>
+                                        <li><strong>Nicht wichtig & nicht dringend:</strong> Eliminieren</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Zeitblockierung</h4>
+                                    <p class="mb-2">Reservieren Sie feste Zeitblöcke im Kalender für bestimmte Aufgaben und halten Sie sich an diese Zeiten.</p>
+                                    <p class="text-sm text-gray-600">Beispiel: Montag und Mittwoch, 9-12 Uhr für Schreibarbeit, Dienstag und Donnerstag, 14-17 Uhr für Recherche.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">Wochenplan erstellen</h4>
+                                <p class="mb-2">Ein detaillierter Wochenplan hilft, den Überblick zu behalten und realistische Ziele zu setzen:</p>
+                                <ol class="list-decimal pl-6 space-y-1">
+                                    <li>Notieren Sie alle wöchentlichen Verpflichtungen (Vorlesungen, Arbeit, etc.)</li>
+                                    <li>Identifizieren Sie freie Zeitblöcke für Ihre Hausarbeit</li>
+                                    <li>Ordnen Sie diesen Zeitblöcken konkrete Aufgaben zu</li>
+                                    <li>Berücksichtigen Sie Ihre Leistungskurve (sind Sie morgens oder abends produktiver?)</li>
+                                    <li>Planen Sie Pausen ein</li>
+                                    <li>Überprüfen Sie am Ende der Woche Ihren Fortschritt und passen Sie den Plan an</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                <p class="text-yellow-700"><strong>Hinweis:</strong> Zeitmanagement ist individuell. Experimentieren Sie mit verschiedenen Methoden und finden Sie heraus, was für Sie am besten funktioniert.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Checkliste für die einzelnen Phasen</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">Vor dem Schreiben</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check1">
+                                        <label for="check1" class="ml-2">Thema und Forschungsfrage klar definiert</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check2">
+                                        <label for="check2" class="ml-2">Vorläufige Gliederung erstellt</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check3">
+                                        <label for="check3" class="ml-2">Grundlegende Literatur recherchiert und beschafft</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check4">
+                                        <label for="check4" class="ml-2">Methodik festgelegt</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check5">
+                                        <label for="check5" class="ml-2">Zeitplan erstellt mit Meilensteinen</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check6">
+                                        <label for="check6" class="ml-2">Formalia geklärt (Zitierweise, Umfang, etc.)</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-3 text-indigo-700">Während des Schreibens</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check7">
+                                        <label for="check7" class="ml-2">Regelmäßig an der Arbeit schreiben</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check8">
+                                        <label for="check8" class="ml-2">Alle Quellen direkt beim Verwenden korrekt zitieren</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check9">
+                                        <label for="check9" class="ml-2">Fortschritt regelmäßig mit Zeitplan abgleichen</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check10">
+                                        <label for="check10" class="ml-2">Bei Problemen rechtzeitig Hilfe suchen</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check11">
+                                        <label for="check11" class="ml-2">Backups der Arbeit erstellen</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-bold mb-3 text-indigo-700">Vor der Abgabe</h4>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check12">
+                                        <label for="check12" class="ml-2">Vollständigkeit prüfen (alle erforderlichen Teile vorhanden)</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check13">
+                                        <label for="check13" class="ml-2">Korrekturlesen auf Rechtschreibung, Grammatik und Stil</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check14">
+                                        <label for="check14" class="ml-2">Zitate und Literaturverzeichnis auf Vollständigkeit und Korrektheit prüfen</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check15">
+                                        <label for="check15" class="ml-2">Layout und Formatierung überprüfen</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <label for="check16" class="ml-2">Seitenzahlen und Inhaltsverzeichnis aktualisieren</label>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check17">
+                                        <label for="check17" class="ml-2">Plagiatsprüfung (falls erforderlich) durchführen</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" id="check18">
+                                        <label for="check18" class="ml-2">Abgabefrist und -format notieren</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-indigo-50 p-5 rounded-lg shadow-sm mb-4">
+                    <h3 class="text-lg font-bold mb-3 text-indigo-800">Tipps zur Selbstorganisation</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold mb-2">Arbeitsumgebung optimieren</h4>
+                            <ul class="list-disc pl-6 space-y-1 text-sm">
+                                <li>Aufgeräumter, ruhiger Arbeitsplatz</li>
+                                <li>Alle benötigten Materialien griffbereit</li>
+                                <li>Ablenkungen minimieren (Handy weglegen, Benachrichtigungen deaktivieren)</li>
+                                <li>Ergonomische Sitzposition</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Motivation aufrechterhalten</h4>
+                            <ul class="list-disc pl-6 space-y-1 text-sm">
+                                <li>Realistische Tagesziele setzen</li>
+                                <li>Erfolge feiern und belohnen</li>
+                                <li>Arbeit in "Sprints" mit klaren Pausen</li>
+                                <li>Austausch mit Kommilitonen suchen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="font-semibold mb-2">Digitale Helfer nutzen</h4>
+                        <ul class="list-disc pl-6 space-y-1 text-sm">
+                            <li><strong>Projektmanagement-Tools:</strong> Trello, Notion, Asana</li>
+                            <li><strong>Fokus-Apps:</strong> Forest, Focus@Will, Freedom</li>
+                            <li><strong>Literaturverwaltung:</strong> Zotero, Mendeley, Citavi</li>
+                            <li><strong>Textverarbeitung:</strong> Microsoft Word, Google Docs, LaTeX</li>
+                            <li><strong>Backup-Lösungen:</strong> Dropbox, Google Drive, OneDrive</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 8: Beispiele -->
+            <section id="beispiele" class="section-content mb-12">
+                <h2 class="section-heading text-2xl font-bold mb-6 pb-2 border-b-2 border-indigo-200">Beispielhausarbeiten</h2>
+                
+                <p class="mb-4">In diesem Abschnitt finden Sie Beispiele für gelungene Hausarbeiten sowie Vorlagen und Muster, die Ihnen beim Erstellen Ihrer eigenen Arbeit helfen können.</p>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Beispielarbeit: Design-Analyse</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-3">„Dark Patterns" – Analyse und Hintergründe einer gezielten Manipulation im digitalen User Interface und User Experience Design</h4>
+                                
+                                <p class="mb-3 text-sm"><strong>Zusammenfassung:</strong> Diese Hausarbeit untersucht manipulative Design-Muster („Dark Patterns") in digitalen Benutzeroberflächen, die Nutzer zu unbeabsichtigten Handlungen verleiten sollen. Die Arbeit analysiert verschiedene Arten von Dark Patterns anhand aktueller Beispiele und diskutiert deren ethische Implikationen.</p>
+                                
+                                <div class="border-l-4 border-indigo-200 pl-4 py-2 mb-3">
+                                    <h5 class="font-semibold mb-1">Stärken der Arbeit:</h5>
+                                    <ul class="list-disc pl-6 space-y-1 text-sm">
+                                        <li>Klare, gut eingegrenzte Forschungsfrage</li>
+                                        <li>Systematische Kategorisierung der untersuchten Design-Muster</li>
+                                        <li>Gelungene Verbindung von Theorie und praktischen Beispielen</li>
+                                        <li>Kritische Reflexion der ethischen Dimension</li>
+                                        <li>Anschauliche Visualisierung der Beispiele</li>
+                                    </ul>
+                                </div>
+                                
+                                <details class="mb-3">
+                                    <summary class="cursor-pointer font-medium text-indigo-700">Inhaltsverzeichnis anzeigen</summary>
+                                    <div class="mt-2 pl-4 text-sm border-l-2 border-gray-200">
+                                        <p>1. Einleitung</p>
+                                        <p>2. Definition und Entstehung von Dark Patterns</p>
+                                        <p>3. Kategorisierung von Dark Patterns</p>
+                                        <p>4. Analyse ausgewählter Beispiele</p>
+                                        <p>5. Psychologische Grundlagen manipulativer Designs</p>
+                                        <p>6. Ethische Betrachtung und Regulierungsansätze</p>
+                                        <p>7. Fazit und Ausblick</p>
+                                        <p>Literaturverzeichnis</p>
+                                        <p>Anhang</p>
+                                    </div>
+                                </details>
+                                
+                                <p class="text-sm text-gray-600"><em>Diese Arbeit zeigt einen gelungenen interdisziplinären Ansatz, der Design-Analyse mit psychologischen und ethischen Aspekten verbindet.</em></p>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <h4 class="font-bold mb-3">Abbildungen über die Körpersprache von Hunden – Analyse zu Darstellungsformen von Lernmaterialien</h4>
+                                
+                                <p class="mb-3 text-sm"><strong>Zusammenfassung:</strong> Diese Arbeit vergleicht und analysiert verschiedene visuelle Darstellungsformen der Körpersprache von Hunden in Lernmaterialien. Der Fokus liegt dabei besonders auf der Darstellung von Droh- und Aggressionssignalen und deren Verständlichkeit für unterschiedliche Zielgruppen.</p>
+                                
+                                <div class="border-l-4 border-indigo-200 pl-4 py-2 mb-3">
+                                    <h5 class="font-semibold mb-1">Stärken der Arbeit:</h5>
+                                    <ul class="list-disc pl-6 space-y-1 text-sm">
+                                        <li>Umfassende, systematische Analyse verschiedener Darstellungsformen</li>
+                                        <li>Methodisch fundierte vergleichende Bildanalyse</li>
+                                        <li>Klare Kriterien für die Bewertung der Effektivität</li>
+                                        <li>Berücksichtigung der Zielgruppenorientierung</li>
+                                        <li>Konkrete Gestaltungsempfehlungen im Fazit</li>
+                                    </ul>
+                                </div>
+                                
+                                <details class="mb-3">
+                                    <summary class="cursor-pointer font-medium text-indigo-700">Beispiel einer gelungenen Analyse</summary>
+                                    <div class="mt-2 pl-4 text-sm border-l-2 border-gray-200">
+                                        <p class="mb-2">Die Analyse verschiedener Darstellungsformen erfolgte anhand folgender Kriterien:</p>
+                                        <ol class="list-decimal pl-6 space-y-1">
+                                            <li>Detailgenauigkeit der Darstellung</li>
+                                            <li>Perspektive und Blickwinkel</li>
+                                            <li>Farbgebung und Kontrast</li>
+                                            <li>Abstraktionsgrad (realistisch vs. stilisiert)</li>
+                                            <li>Kontextualisierung der Körperhaltung</li>
+                                            <li>Begleitender Text und Erklärungen</li>
+                                        </ol>
+                                        <p class="mt-2">Für jedes Kriterium wurden die verschiedenen Darstellungen auf einer Skala von 1-5 bewertet, wodurch ein differenziertes Bild der Stärken und Schwächen entstand.</p>
+                                    </div>
+                                </details>
+                                
+                                <p class="text-sm text-gray-600"><em>Diese Arbeit demonstriert eine methodisch fundierte visuelle Analyse und zeigt, wie Design-Analyse mit praktischen Anwendungsfragen verbunden werden kann.</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Vorlagen und Muster</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Deckblatt</h4>
+                                    <div class="border p-4 mb-3 text-center">
+                                        <p class="mb-2 text-sm">Hausarbeit im Modul [Modulname]</p>
+                                        <p class="mb-2 font-bold">Titel der Arbeit</p>
+                                        <p class="mb-2 text-sm">Untertitel (optional)</p>
+                                        <p class="mb-4">----------------</p>
+                                        <p class="mb-1 text-sm">Hochschule für Medien, Kommunikation und Wirtschaft</p>
+                                        <p class="mb-1 text-sm">Fachbereich [Name]</p>
+                                        <p class="mb-1 text-sm">Studiengang: [Studiengang]</p>
+                                        <p class="mb-1 text-sm">Semester: [Semester]</p>
+                                        <p class="mb-3 text-sm">Dozent/in: [Name]</p>
+                                        <p class="mb-1 text-sm">Verfasser/in: [Vor- und Nachname]</p>
+                                        <p class="mb-1 text-sm">Matrikelnummer: [Nummer]</p>
+                                        <p class="mb-1 text-sm">E-Mail: [E-Mail-Adresse]</p>
+                                        <p class="mb-1 text-sm">Abgabedatum: [Datum]</p>
+                                    </div>
+                                    <p class="text-sm text-gray-600">Achten Sie auf eine klare, übersichtliche Gestaltung des Deckblatts. Verwenden Sie die Vorlage Ihrer Hochschule, falls eine solche existiert.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Inhaltsverzeichnis</h4>
+                                    <div class="border p-4 mb-3">
+                                        <p class="font-bold mb-3">Inhaltsverzeichnis</p>
+                                        <div class="flex justify-between mb-1 text-sm">
+                                            <span>1. Einleitung</span>
+                                            <span>1</span>
+                                        </div>
+                                        <div class="flex justify-between mb-1 text-sm">
+                                            <span>2. Hauptteil</span>
+                                            <span>2</span>
+                                        </div>
+                                        <div class="flex justify-between ml-4 mb-1 text-sm">
+                                            <span>2.1 Theoretische Grundlagen</span>
+                                            <span>2</span>
+                                        </div>
+                                        <div class="flex justify-between ml-4 mb-1 text-sm">
+                                            <span>2.2 Methodik</span>
+                                            <span>5</span>
+                                        </div>
+                                        <div class="flex justify-between ml-4 mb-1 text-sm">
+                                            <span>2.3 Ergebnisse der Untersuchung</span>
+                                            <span>8</span>
+                                        </div>
+                                        <div class="flex justify-between mb-1 text-sm">
+                                            <span>3. Diskussion</span>
+                                            <span>12</span>
+                                        </div>
+                                        <div class="flex justify-between mb-1 text-sm">
+                                            <span>4. Fazit</span>
+                                            <span>15</span>
+                                        </div>
+                                        <div class="flex justify-between mb-1 text-sm">
+                                            <span>Literaturverzeichnis</span>
+                                            <span>17</span>
+                                        </div>
+                                        <div class="flex justify-between mb-1 text-sm">
+                                            <span>Anhang</span>
+                                            <span>19</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-600">Das Inhaltsverzeichnis sollte alle Überschriften mit den entsprechenden Seitenzahlen enthalten. Bei längeren Arbeiten kann auch ein Abbildungs- und Tabellenverzeichnis sinnvoll sein.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Beispiel für eine Einleitung</h4>
+                                    <div class="border p-4 mb-3">
+                                        <p class="font-bold mb-2">1. Einleitung</p>
+                                        <p class="text-sm mb-2">
+                                            In der digitalen Designlandschaft haben sich in den letzten Jahren zunehmend Praktiken etabliert, die bewusst darauf abzielen, Nutzer zu manipulieren und zu ungewollten Handlungen zu verleiten. Diese als "Dark Patterns" bezeichneten Designmuster werfen Fragen nach der ethischen Verantwortung von Designern und Unternehmen auf.
+                                        </p>
+                                        <p class="text-sm mb-2">
+                                            Die vorliegende Arbeit untersucht, welche Arten von Dark Patterns aktuell in digitalen Interfaces eingesetzt werden und wie diese psychologisch wirken. Besonderes Augenmerk liegt dabei auf der Frage, inwieweit solche Praktiken ethisch vertretbar sind und welche Regulierungsansätze existieren.
+                                        </p>
+                                        <p class="text-sm">
+                                            Nach einer begrifflichen Einordnung werden verschiedene Kategorien von Dark Patterns vorgestellt und anhand ausgewählter Beispiele analysiert. Anschließend werden die psychologischen Mechanismen erläutert, die die Wirksamkeit dieser Designmuster erklären. Abschließend erfolgt eine kritische Reflexion der ethischen Implikationen und ein Ausblick auf mögliche Entwicklungen in diesem Bereich.
+                                        </p>
+                                    </div>
+                                    <p class="text-sm text-gray-600">Eine gute Einleitung führt zum Thema hin, erläutert die Forschungsfrage und gibt einen kurzen Überblick über den Aufbau der Arbeit.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h4 class="font-bold mb-2 text-indigo-700">Beispiel für ein Fazit</h4>
+                                    <div class="border p-4 mb-3">
+                                        <p class="font-bold mb-2">4. Fazit</p>
+                                        <p class="text-sm mb-2">
+                                            Die vorliegende Untersuchung hat gezeigt, dass Dark Patterns in digitalen Interfaces weit verbreitet sind und verschiedene Formen annehmen können. Besonders häufig kommen Muster wie Roach Motel, Forced Continuity und Misdirection vor, die gezielt kognitive Biases der Nutzer ausnutzen.
+                                        </p>
+                                        <p class="text-sm mb-2">
+                                            Die Analyse verdeutlicht, dass diese Designpraktiken zwar kurzfristig zu höheren Conversions führen können, langfristig jedoch das Vertrauen der Nutzer schädigen. Die ethische Betrachtung zeigt eine klare Spannung zwischen wirtschaftlichen Interessen und berufsethischen Grundsätzen des Designs.
+                                        </p>
+                                        <p class="text-sm mb-2">
+                                            Als Antwort auf die Forschungsfrage lässt sich festhalten, dass die manipulative Wirkung von Dark Patterns auf psychologischen Prinzipien wie dem Framing-Effekt, der Default-Bias und dem Attention Economy beruht. Diese werden bewusst eingesetzt, um Nutzer zu lenken und zu beeinflussen.
+                                        </p>
+                                        <p class="text-sm">
+                                            Für die Zukunft zeichnet sich eine verstärkte Regulierung dieser Praktiken ab, wie die bereits eingeführten Maßnahmen im Rahmen der DSGVO zeigen. Gleichzeitig wächst auch das Bewusstsein für ethisches Design, was zu einer stärkeren Selbstregulierung der Branche führen könnte. Weitere Forschung sollte sich auf die langfristigen Auswirkungen von Dark Patterns auf das Nutzervertrauen sowie auf die Entwicklung von Frameworks für ethisches Design konzentrieren.
+                                        </p>
+                                    </div>
+                                    <p class="text-sm text-gray-600">Ein gutes Fazit fasst die wichtigsten Ergebnisse zusammen, beantwortet die Forschungsfrage und gibt einen Ausblick auf offene Fragen oder zukünftige Entwicklungen.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h4 class="font-bold mb-2 text-indigo-700">Literaturverzeichnis (APA-Stil)</h4>
+                                <div class="border p-4 mb-3">
+                                    <p class="font-bold mb-3">Literaturverzeichnis</p>
+                                    <div class="text-sm space-y-2">
+                                        <p class="ml-4 text-indent-(-2em)">Brignull, H. (2010). Dark Patterns: Deception vs. Honesty in UI Design. <em>A List Apart</em>, 338. https://alistapart.com/article/dark-patterns-deception-vs-honesty-in-ui-design/</p>
+                                        <p class="ml-4 text-indent-(-2em)">Gray, C. M., Kou, Y., Battles, B., Hoggatt, J., & Toombs, A. L. (2018). The Dark (Patterns) Side of UX Design. In <em>Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems</em> (Paper No. 534, pp. 1–14). Association for Computing Machinery. https://doi.org/10.1145/3173574.3174108</p>
+                                        <p class="ml-4 text-indent-(-2em)">Kahneman, D. (2011). <em>Thinking, Fast and Slow</em>. Farrar, Straus and Giroux.</p>
+                                        <p class="ml-4 text-indent-(-2em)">Mathur, A., Acar, G., Friedman, M., Lucherini, E., Mayer, J., Chetty, M., & Narayanan, A. (2019). Dark Patterns at Scale: Findings from a Crawl of 11K Shopping Websites. <em>Proceedings of the ACM on Human-Computer Interaction</em>, 3(CSCW), Article 81. https://doi.org/10.1145/3359183</p>
+                                        <p class="ml-4 text-indent-(-2em)">Norman, D. (2013). <em>The Design of Everyday Things: Revised and Expanded Edition</em>. Basic Books.</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-600">Das Literaturverzeichnis enthält alle in der Arbeit zitierten Quellen in alphabetischer Reihenfolge nach dem Nachnamen des Erstautors. Formatieren Sie die Einträge gemäß des von Ihrer Hochschule geforderten Zitierstils.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion mb-4 bg-gray-50 p-4 rounded-lg">
+                    <div class="accordion-header flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Häufige Fehler und wie man sie vermeidet</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="accordion-content pt-0">
+                        <div class="pt-4">
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm border-l-4 border-red-400">
+                                    <h4 class="font-bold mb-2 text-red-700">Fehler: Unklare Forschungsfrage</h4>
+                                    <p class="mb-2 text-sm">Eine zu vage oder zu umfangreiche Forschungsfrage führt zu einer unfokussierten Arbeit.</p>
+                                    <p class="text-sm font-semibold">Lösung:</p>
+                                    <ul class="list-disc pl-6 space-y-1 text-sm">
+                                        <li>Die Forschungsfrage präzise und konkret formulieren</li>
+                                        <li>Auf eine angemessene Eingrenzung achten (zeitlich, räumlich, inhaltlich)</li>
+                                        <li>Die Frage mit Ihrem Betreuer abstimmen</li>
+                                        <li>Prüfen, ob die Frage im Rahmen der Arbeit beantwortbar ist</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm border-l-4 border-red-400">
+                                    <h4 class="font-bold mb-2 text-red-700">Fehler: Mangelnde Struktur</h4>
+                                    <p class="mb-2 text-sm">Eine unlogische oder unausgewogene Gliederung erschwert das Verständnis der Arbeit.</p>
+                                    <p class="text-sm font-semibold">Lösung:</p>
+                                    <ul class="list-disc pl-6 space-y-1 text-sm">
+                                        <li>Vor dem Schreiben eine detaillierte Gliederung erstellen</li>
+                                        <li>Auf logischen Aufbau und roten Faden achten</li>
+                                        <li>Für angemessene Gewichtung der Kapitel sorgen</li>
+                                        <li>Überleitungen zwischen den Kapiteln schaffen</li>
+                                        <li>Jedes Kapitel sollte zur Beantwortung der Forschungsfrage beitragen</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm border-l-4 border-red-400">
+                                    <h4 class="font-bold mb-2 text-red-700">Fehler: Inkorrekte Zitation</h4>
+                                    <p class="mb-2 text-sm">Fehlerhafte oder uneinheitliche Quellenangaben können als Plagiat gewertet werden.</p>
+                                    <p class="text-sm font-semibold">Lösung:</p>
+                                    <ul class="list-disc pl-6 space-y-1 text-sm">
+                                        <li>Einen einheitlichen Zitierstil wählen und konsequent anwenden</li>
+                                        <li>Bei der Recherche sorgfältig alle bibliografischen Angaben notieren</li>
+                                        <li>Direkte und indirekte Zitate korrekt kennzeichnen</li>
+                                        <li>Literaturverwaltungsprogramme wie Zotero oder Citavi nutzen</li>
+                                        <li>Vor der Abgabe alle Quellenangaben prüfen</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm border-l-4 border-red-400">
+                                    <h4 class="font-bold mb-2 text-red-700">Fehler: Unzureichende Quellenauswahl</h4>
+                                    <p class="mb-2 text-sm">Das Verwenden veralteter oder unwissenschaftlicher Quellen mindert die Qualität der Arbeit.</p>
+                                    <p class="text-sm font-semibold">Lösung:</p>
+                                    <ul class="list-disc pl-6 space-y-1 text-sm">
+                                        <li>Vorrangig wissenschaftliche Fachliteratur verwenden</li>
+                                        <li>Auf Aktualität der Quellen achten (besonders bei technischen Themen)</li>
+                                        <li>Verschiedene Perspektiven und Standpunkte einbeziehen</li>
+                                        <li>Quellen kritisch hinterfragen und bewerten</li>
+                                        <li>Wikipedia nur als Einstieg, nicht als zitierbare Quelle nutzen</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6 mb-4">
+                                <div class="bg-white p-4 rounded shadow-sm border-l-4 border-red-400">
+                                    <h4 class="font-bold mb-2 text-red-700">Fehler: Subjektiver Schreibstil</h4>
+                                    <p class="mb-2 text-sm">Ein zu persönlicher oder journalistischer Stil entspricht nicht den Anforderungen wissenschaftlichen Schreibens.</p>
+                                    <p class="text-sm font-semibold">Lösung:</p>
+                                    <ul class="list-disc pl-6 space-y-1 text-sm">
+                                        <li>Sachlichen, neutralen Schreibstil verwenden</li>
+                                        <li>Auf Ich-Form verzichten (außer in reflektierenden Passagen)</li>
+                                        <li>Behauptungen durch Quellen oder empirische Daten belegen</li>
+                                        <li>Alltagssprache und umgangssprachliche Wendungen vermeiden</li>
+                                        <li>Präzise Fachbegriffe verwenden und erklären</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded shadow-sm border-l-4 border-red-400">
+                                    <h4 class="font-bold mb-2 text-red-700">Fehler: Mangelnde kritische Auseinandersetzung</h4>
+                                    <p class="mb-2 text-sm">Reine Beschreibung ohne eigene Analyse und kritische Reflexion schwächt die wissenschaftliche Qualität.</p>
+                                    <p class="text-sm font-semibold">Lösung:</p>
+                                    <ul class="list-disc pl-6 space-y-1 text-sm">
+                                        <li>Nicht nur beschreiben, sondern auch analysieren und bewerten</li>
+                                        <li>Verschiedene Positionen und Argumente gegenüberstellen</li>
+                                        <li>Stärken und Schwächen der verwendeten Methodik reflektieren</li>
+                                        <li>Eigene Schlussfolgerungen aus der Analyse ziehen</li>
+                                        <li>Grenzen der eigenen Untersuchung aufzeigen</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm border-l-4 border-red-400 mb-4">
+                                <h4 class="font-bold mb-2 text-red-700">Fehler: Formale und sprachliche Mängel</h4>
+                                <p class="mb-2 text-sm">Rechtschreib- und Grammatikfehler sowie Formatierungsprobleme wirken unprofessionell und können den Inhalt überdecken.</p>
+                                <p class="text-sm font-semibold">Lösung:</p>
+                                <ul class="list-disc pl-6 space-y-1 text-sm">
+                                    <li>Ausreichend Zeit für Korrekturlesedurchgänge einplanen</li>
+                                    <li>Eine andere Person Korrektur lesen lassen</li>
+                                    <li>Rechtschreib- und Grammatikprüfprogramme nutzen</li>
+                                    <li>Auf einheitliche Formatierung achten (Schriftart, Zeilenabstand, Überschriften)</li>
+                                    <li>Durchgängige Nummerierung von Abbildungen und Tabellen sicherstellen</li>
+                                    <li>Auf konsistente Verwendung von Fachbegriffen achten</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-green-50 border-l-4 border-green-400 p-4">
+                                <p class="text-green-700"><strong>Tipp:</strong> Lassen Sie nach Fertigstellung Ihrer Arbeit etwas Zeit vergehen, bevor Sie diese noch einmal durchlesen. Mit Abstand erkennen Sie Fehler und Schwachstellen oft besser. Bitten Sie zudem Kommilitonen oder Freunde, die Arbeit gegenzulesen und konstruktives Feedback zu geben.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PDF Export Option -->
+            <div class="bg-gray-100 p-4 rounded-lg shadow-sm mb-8 flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h3 class="font-bold text-lg mb-2">Inhalte exportieren</h3>
+                    <p class="text-sm text-gray-600">Sie können diese Inhalte als PDF herunterladen, um sie auch offline nutzen zu können.</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <button id="print-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded flex items-center">
+                        <i class="fas fa-file-pdf mr-2"></i> Als PDF speichern
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Feedback Section -->
+            <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
+                <h3 class="font-bold text-lg mb-4">Feedback und Verbesserungsvorschläge</h3>
+                <p class="mb-4">Haben Sie Anregungen oder Feedback zu diesem Guide? Wir freuen uns über Ihre Rückmeldung, um den Leitfaden stetig zu verbessern.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="feedback-name" class="block text-sm font-medium text-gray-700 mb-1">Name (optional)</label>
+                        <input type="text" id="feedback-name" class="w-full p-2 border border-gray-300 rounded">
+                    </div>
+                    <div>
+                        <label for="feedback-email" class="block text-sm font-medium text-gray-700 mb-1">E-Mail (optional)</label>
+                        <input type="email" id="feedback-email" class="w-full p-2 border border-gray-300 rounded">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label for="feedback-message" class="block text-sm font-medium text-gray-700 mb-1">Ihre Nachricht</label>
+                    <textarea id="feedback-message" rows="4" class="w-full p-2 border border-gray-300 rounded"></textarea>
+                </div>
+                <div class="mt-4">
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                        Feedback senden
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mode Toggle and Back to Top -->
+    <div class="fixed bottom-4 right-4 flex flex-col space-y-2">
+        <button id="mode-toggle" class="bg-indigo-700 hover:bg-indigo-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+            <i class="fas fa-moon text-xl"></i>
+        </button>
+        <button id="back-to-top" class="bg-gray-700 hover:bg-gray-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+            <i class="fas fa-arrow-up text-xl"></i>
+        </button>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-8 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">MU Berlin</h3>
+                    <p class="text-sm mb-2">G1 Wissenschaftliches Propädeutikum</p>
+                    <p class="text-sm">Winter Semester 2024/25</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Nützliche Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://designchange.wordpress.com/2022/02/07/list-of-academic-design-journals/" class="hover:text-indigo-300">Akademische Design-Journals</a></li>
+                        <li><a href="http://www.apastyle.org" class="hover:text-indigo-300">APA Style Guide</a></li>
+                        <li><a href="https://www.hmkw.de" class="hover:text-indigo-300">HMKW Website</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Kontakt</h3>
+                    <p class="text-sm mb-2">Bei Fragen wenden Sie sich an Ihren Dozenten oder die Studienberatung.</p>
+                    <p class="text-sm">Email: studienberatung@hmkw.de</p>
+                </div>
+            </div>
+            <div class="mt-8 pt-4 border-t border-gray-700 text-sm text-center">
+                <p>&copy; 2025 MU Berlin. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle sidebar on mobile
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        });
+        
+        // Navigation active state
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section-content');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                
+                // Hide all sections and deactivate all links
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                navLinks.forEach(navLink => {
+                    navLink.classList.remove('bg-indigo-600');
+                });
+                
+                // Show target section and activate clicked link
+                document.getElementById(targetId).classList.add('active');
+                this.classList.add('bg-indigo-600');
+                
+                // Close sidebar on mobile after clicking a link
+                if (window.innerWidth < 768) {
+                    document.getElementById('sidebar').classList.add('hidden');
+                }
+                
+                // Scroll to top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Accordion functionality
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+        
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                // Toggle content
+                content.classList.toggle('open');
+                
+                // Toggle icon
+                if (content.classList.contains('open')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                } else {
+                    content.style.maxHeight = '0';
+                    icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+                }
+            });
+        });
+        
+        // Tab functionality
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                
+                // Hide all tab contents and deactivate all tab links
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                tabLinks.forEach(tabLink => {
+                    tabLink.classList.remove('active');
+                    tabLink.classList.remove('bg-indigo-100');
+                });
+                
+                // Show target tab content and activate clicked tab link
+                document.getElementById(targetId).classList.add('active');
+                this.classList.add('active');
+                this.classList.add('bg-indigo-100');
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        const navMenu = document.getElementById('nav-menu');
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const navItems = navMenu.querySelectorAll('li a');
+            
+            navItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.parentElement.style.display = '';
+                } else {
+                    item.parentElement.style.display = 'none';
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Dark/Light mode toggle
+        const modeToggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        const moonIcon = document.querySelector('#mode-toggle i');
+        
+        modeToggle.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                moonIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                moonIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+        
+        // Check for saved mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            moonIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        // Print/PDF functionality
+        document.getElementById('print-btn').addEventListener('click', function() {
+            window.print();
+        });
+    </script>
+</body>
+</html>
